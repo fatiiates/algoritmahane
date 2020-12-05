@@ -1,4 +1,7 @@
 import { performance } from 'perf_hooks';
+import createIPerformance from '../../types/generators/Performance';
+import TPerformance from '../../types/Performance';
+
 
 export const linearSearch = <T extends unknown>(array: Array<T>, searched: T): number => {
 
@@ -9,7 +12,9 @@ export const linearSearch = <T extends unknown>(array: Array<T>, searched: T): n
 
 };
 
-const performanceLinearSearch = <T extends unknown>(array: Array<T>, searched: T): object => {
+const performanceLinearSearch = <T extends unknown>(array: Array<T>, searched: T): TPerformance => {
+
+    console.log(array);
 
     let start: number = performance.now();
 
@@ -17,10 +22,11 @@ const performanceLinearSearch = <T extends unknown>(array: Array<T>, searched: T
 
     let end: number = performance.now();
 
-    return {
-        result: result,
-        performance: end - start
-    }
+    let send = createIPerformance();
+    send.index = result;
+    send.performance = end - start;
+    
+    return send;
 
 };
 

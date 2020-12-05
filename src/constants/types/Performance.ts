@@ -1,5 +1,5 @@
 export interface IPerformance {
-    result: number;
+    index: number;
     performance: number;
 };
 

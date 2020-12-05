@@ -1,5 +1,5 @@
-export interface IResponse {
-    ok: boolean;
+interface IResponse {
+    readonly ok: boolean;
 };
 
 export interface ISuccessResponse extends IResponse {
