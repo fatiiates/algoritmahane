@@ -4,8 +4,11 @@ import { AppProps } from 'next/app';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../components/material/Theme';
+import configureStore from '../redux/configureStore';
 
+import {Provider} from 'react-redux';
 
+const store = configureStore();
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
 
@@ -24,11 +27,13 @@ export default function MyApp(props: AppProps) {
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
         <meta name="author" content="Fatih ATEŞ" />
       </Head>
-      <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
+        </ThemeProvider>
+      </Provider>
     </React.Fragment>
   );
 }

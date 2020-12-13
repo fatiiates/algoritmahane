@@ -1,13 +1,13 @@
 import { ISuccessResponse, IErrorResponse } from "../Response";
 
-export const createISuccessResponse = (): ISuccessResponse => {
+export const createSuccessResponse = (): ISuccessResponse => {
     return {
         ok: true,
         result: {}
     };
 };
 
-export const createIErrorResponse = (): IErrorResponse => {
+export const createErrorResponse = (): IErrorResponse => {
     return {
         ok: false,
         err_code: 0,

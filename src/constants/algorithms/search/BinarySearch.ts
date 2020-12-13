@@ -1,8 +1,7 @@
 import { performance } from 'perf_hooks';
 import { createSearchPerformance } from '../../types/generators/Performance';
 
-
-export const linearSearch = async (array: Array<number>, searched: number): Promise<any> => {
+export const binarySearch = async (array: Array<number>, searched: number): Promise<any> => {
 
     return new Promise(function (resolve, reject) {
         if (typeof array == 'undefined')
@@ -13,13 +12,34 @@ export const linearSearch = async (array: Array<number>, searched: number): Prom
             return reject(new Error("Dizi içerisinde aranacak bir eleman bulunamadı."));
 
         let numberOfTransactions = 1;
-        let start: number = performance.now();
-        
-        for (let i = 0; i < array.length; i++) {
+        let start = performance.now();
+        array.sort(function (a, b) {
             numberOfTransactions++;
-            if (array[i] == searched) {
+            return a - b;
+        });
+
+        numberOfTransactions++;
+        let alt: number = 1,
+            orta: number = 0,
+            ust: number = array.length;
+
+        numberOfTransactions++;
+        while (ust >= alt) {
+            numberOfTransactions++;
+            orta = Math.floor((alt + ust) / 2);
+            numberOfTransactions += 3;
+            if (array[orta] == searched) {
+                numberOfTransactions -= 1;
+                return resolve({
+                    index: orta,
+                    numberOfTransactions
+                });
+            }
+            else if (searched < array[orta])
+                ust = orta - 1;
+            else {
                 numberOfTransactions++;
-                return resolve({ index: ++i, numberOfTransactions });
+                alt = orta + 1;
             }
         }
         let end = performance.now();
@@ -31,21 +51,19 @@ export const linearSearch = async (array: Array<number>, searched: number): Prom
         });
     });
 
-};
+}
 
-const performanceLinearSearch = async (array: Array<number>, searched: number): Promise<any> => {
+const performanceBinarySearch = async (array: Array<number>, searched: number): Promise<any> => {
 
     return new Promise(async function (resolve, reject) {
-        
-
-        await linearSearch(array, searched)
+        let starterArray = array.toString();
+        await binarySearch(array, searched)
             .then(result => {
-                
                 resolve(createSearchPerformance({
                     index: result.index,
                     performance: result.performance,
                     numberOfTransactions: result.numberOfTransactions,
-                    dataset: array.toString(),
+                    dataset: starterArray,
                     algorithmInfo: "",
                 }));
             })
@@ -54,4 +72,4 @@ const performanceLinearSearch = async (array: Array<number>, searched: number): 
 
 };
 
-export default performanceLinearSearch;
+export default performanceBinarySearch;

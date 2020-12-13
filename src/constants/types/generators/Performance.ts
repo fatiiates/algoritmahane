@@ -1,10 +1,58 @@
-import { IPerformance } from "../Performance";
+import { 
+    IOptionalPerformance,        
+    IOptionalSearchPerformance,         
+    IOptionalSortPerformance,         
+    IPerformance,         
+    ISearchPerformance,         
+    ISortPerformance 
+} from "../Performance";
 
-const createIPerformance = (): IPerformance => {
+export const createPerformance = ({
+            performance = 0,
+            numberOfTransactions = 0,
+            dataset = "",
+            algorithmInfo = ""
+        }:IOptionalPerformance
+    ): IPerformance => {
     return {
-        index: 0,
-        performance: 0
+        performance,
+        numberOfTransactions,
+        dataset,
+        algorithmInfo   
     };
 };
 
-export default createIPerformance;
+export const createSearchPerformance = ({
+            index = 0,
+            performance = 0,
+            numberOfTransactions = 0,
+            dataset = "",
+            algorithmInfo = ""
+        }:IOptionalSearchPerformance
+    ): ISearchPerformance => {
+    return {
+        index,
+        performance,
+        numberOfTransactions,
+        dataset,
+        algorithmInfo   
+    };
+};
+
+export const createSortPerformance = ({
+            sortedDataset = "",
+            performance = 0,
+            numberOfTransactions = 0,
+            dataset = "",
+            algorithmInfo = ""
+        }:IOptionalSortPerformance
+    ): ISortPerformance => {
+    return {
+        sortedDataset,
+        performance,
+        numberOfTransactions,
+        dataset,
+        algorithmInfo
+    };
+};
+
