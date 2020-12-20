@@ -23,9 +23,8 @@ export const binarySearch = async (array: Array<number>, searched: number): Prom
             orta: number = 0,
             ust: number = array.length;
 
-        numberOfTransactions++;
         while (ust >= alt) {
-            numberOfTransactions++;
+            numberOfTransactions += 2;
             orta = Math.floor((alt + ust) / 2);
             numberOfTransactions += 3;
             if (array[orta] == searched) {
@@ -43,7 +42,7 @@ export const binarySearch = async (array: Array<number>, searched: number): Prom
             }
         }
         let end = performance.now();
-        numberOfTransactions++;     
+        numberOfTransactions += 2;     
         return resolve({ 
             index: -1, 
             numberOfTransactions,

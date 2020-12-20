@@ -42,43 +42,52 @@ export const mergeSort = (array: Array<number>, left: number, right: number) => 
     return numberOfTransactions;
 }
 
-export const merge = (A: Array<number>, left: number, pivot: number, right : number) => {
+export const merge = (A: Array<number>, left: number, pivot: number, right: number) => {
     let numberOfTransactions = 4;
 
     const n1: number = pivot - left + 1;
     const n2: number = right - pivot;
     let L: Array<number> = Array(n1);
-    let R: Array<number> = Array(n2 );
-    
-    numberOfTransactions += n1
-    for(let i = 0; i < n1; i++)
-        L[i] = A[left + i -1 ];
-  
-    for(let j = 0; j < n1; j++)
+    let R: Array<number> = Array(n2);
+
+    numberOfTransactions += 2 * n1 - 1;
+    for (let i = 0; i < n1; i++)
+        L[i] = A[left + i - 1];
+
+    numberOfTransactions += 2 * n1 - 1;
+    for (let j = 0; j < n1; j++)
         R[j] = A[pivot + j];
-  
+
+    numberOfTransactions += 4;
     L[n1] = Number.MAX_SAFE_INTEGER;
     R[n2] = Number.MAX_SAFE_INTEGER;
     let i: number = 1;
     let j: number = 1;
-    for(let k = left; k < right; k++)
-        if(L[i] <= R[j]){
+
+    numberOfTransactions += right - left;
+    for (let k = left; k < right; k++){
+        numberOfTransactions += 2;
+        if (L[i] <= R[j]) {
+            numberOfTransactions++;
             A[k] = L[i];
             i++;
         }
-        else{
+        else {
+            numberOfTransactions += 2;
             A[k] = L[j];
             j++;
-        } 
- }
- 
+        }}
+        
+    return numberOfTransactions;
+}
 
-const performanceInsertionSort = async (array: Array<number>, searched: number): Promise<any> => {
+
+const performanceMergeSort = async (array: Array<number>, searched: number): Promise<any> => {
 
     return new Promise(async function (resolve, reject) {
         let start: number = performance.now();
         let starterArray = array.toString();
-        await insertionSort(array)
+        await mergeSortController(array, 0, array.length)
             .then(result => {
                 let end = performance.now();
                 resolve(createSortPerformance({
@@ -94,4 +103,4 @@ const performanceInsertionSort = async (array: Array<number>, searched: number):
 
 };
 
-export default performanceInsertionSort;
+export default performanceMergeSort;

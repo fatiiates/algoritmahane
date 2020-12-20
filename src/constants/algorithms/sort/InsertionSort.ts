@@ -16,7 +16,7 @@ export const insertionSort = async (array: Array<number>): Promise<any> => {
             numberOfTransactions += 2;
             let j = 0;
             while (j < i) {
-                numberOfTransactions += 2;
+                numberOfTransactions += 3;
                 if (array[j] > array[i]) {
                     numberOfTransactions += 3;
                     let temp = array[j];
@@ -25,9 +25,10 @@ export const insertionSort = async (array: Array<number>): Promise<any> => {
                 }
                 j++;
             }
+            numberOfTransactions++;
         }
         let end = performance.now();
-        numberOfTransactions++;     
+        numberOfTransactions += 2;     
         return resolve({ 
             array,
             numberOfTransactions,

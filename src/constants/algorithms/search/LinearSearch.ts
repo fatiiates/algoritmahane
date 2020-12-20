@@ -12,18 +12,18 @@ export const linearSearch = async (array: Array<number>, searched: number): Prom
         else if (typeof searched == 'undefined')
             return reject(new Error("Dizi içerisinde aranacak bir eleman bulunamadı."));
 
-        let numberOfTransactions = 1;
+        let numberOfTransactions = 0;
         let start: number = performance.now();
         
         for (let i = 0; i < array.length; i++) {
-            numberOfTransactions++;
+            numberOfTransactions += 2;
             if (array[i] == searched) {
                 numberOfTransactions++;
                 return resolve({ index: ++i, numberOfTransactions });
             }
         }
         let end = performance.now();
-        numberOfTransactions++;     
+        numberOfTransactions += 2;     
         return resolve({ 
             index: -1, 
             numberOfTransactions,
