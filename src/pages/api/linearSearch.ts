@@ -17,7 +17,7 @@ const Main = (req: NextApiRequest, res: NextApiResponse) => {
                 const dataArray = array.split(',');
 
                 let send: TResponse = createSuccessResponse();
-                send.result = performanceLinearSearch<typeof searched>(dataArray, searched);
+                send.result = performanceLinearSearch(dataArray, searched);
     
                 res.json(send)
             }

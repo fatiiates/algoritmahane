@@ -15,8 +15,9 @@ export const linearSearch = async (array: Array<number>, searched: number): Prom
         let numberOfTransactions = 0;
         let start: number = performance.now();
         
+        numberOfTransactions += array.length + 1;
         for (let i = 0; i < array.length; i++) {
-            numberOfTransactions += 2;
+            numberOfTransactions += 1;
             if (array[i] == searched) {
                 numberOfTransactions++;
                 return resolve({ index: ++i, numberOfTransactions });

@@ -50,13 +50,16 @@ export const merge = (A: Array<number>, left: number, pivot: number, right: numb
     let L: Array<number> = Array(n1);
     let R: Array<number> = Array(n2);
 
-    numberOfTransactions += 2 * n1 - 1;
-    for (let i = 0; i < n1; i++)
+    numberOfTransactions += n1 + 1;
+    for (let i = 0; i < n1; i++) {
+        numberOfTransactions += 1;
         L[i] = A[left + i - 1];
-
-    numberOfTransactions += 2 * n1 - 1;
-    for (let j = 0; j < n1; j++)
+    }
+    numberOfTransactions += n1 + 1;
+    for (let j = 0; j < n1; j++){
+        numberOfTransactions += 1;
         R[j] = A[pivot + j];
+    }
 
     numberOfTransactions += 4;
     L[n1] = Number.MAX_SAFE_INTEGER;
@@ -65,7 +68,7 @@ export const merge = (A: Array<number>, left: number, pivot: number, right: numb
     let j: number = 1;
 
     numberOfTransactions += right - left;
-    for (let k = left; k < right; k++){
+    for (let k = left; k < right; k++) {
         numberOfTransactions += 2;
         if (L[i] <= R[j]) {
             numberOfTransactions++;
@@ -76,13 +79,14 @@ export const merge = (A: Array<number>, left: number, pivot: number, right: numb
             numberOfTransactions += 2;
             A[k] = L[j];
             j++;
-        }}
-        
+        }
+    }
+
     return numberOfTransactions;
 }
 
 
-const performanceMergeSort = async (array: Array<number>, searched: number): Promise<any> => {
+const performanceMergeSort = async (array: Array<number>): Promise<any> => {
 
     return new Promise(async function (resolve, reject) {
         let start: number = performance.now();

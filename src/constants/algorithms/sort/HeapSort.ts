@@ -1,12 +1,12 @@
 import { performance } from 'perf_hooks';
 import { createSortPerformance } from '../../types/generators/Performance';
 
-class HeapSort {
+export class HeapSort {
     heapSize: number;
     numberOfTransactions: number;
     constructor(array: Array<any>){
         this.heapSize = 0;
-        this.numberOfTransactions = 0;
+        this.numberOfTransactions = 2;
         this.heapSort(array, array.length);
     }
 
@@ -34,7 +34,6 @@ class HeapSort {
             this.numberOfTransactions++;
             largest = l;
         }
-    
 
         if (r < this.getHeapSize() && array[r] > array[largest]){
             this.numberOfTransactions++;
@@ -104,7 +103,7 @@ export const createHeapSort = async (array: Array<number>): Promise<any> => {
 
 }
 
-const performanceHeapSort = async (array: Array<number>, searched: number): Promise<any> => {
+const performanceHeapSort = async (array: Array<number>): Promise<any> => {
 
     return new Promise(async function (resolve, reject) {
         let starterArray = array.toString();

@@ -1,10 +1,10 @@
 import { performance } from 'perf_hooks';
 import { createSortPerformance } from '../../types/generators/Performance';
 
-class QuickSort {
+export class QuickSort {
     numberOfTransactions: number;
     constructor(array: Array<number>) {
-        this.numberOfTransactions = 0;
+        this.numberOfTransactions = 1;
         this.quickSort(array, 0, array.length);
     }
 
@@ -23,7 +23,7 @@ class QuickSort {
     }
 
     private partition(array: Array<any>, pivot: number, q: number) {
-        this.numberOfTransactions += 3;
+        this.numberOfTransactions += 2;
 
         const x = array[pivot];
         var i = pivot;
@@ -75,7 +75,7 @@ export const createQuickSort = async (array: Array<number>): Promise<any> => {
 
 }
 
-const performanceInsertionSort = async (array: Array<number>, searched: number): Promise<any> => {
+const performanceInsertionSort = async (array: Array<number>): Promise<any> => {
 
     return new Promise(async function (resolve, reject) {
         let starterArray = array.toString();
