@@ -1,16 +1,25 @@
-import { ISuccessResponse, IErrorResponse } from "../Response";
+import { ISuccessResponse, IErrorResponse, IOptionalSuccessResponse, IOptionalErrorResponse } from "../Response";
 
-export const createSuccessResponse = (): ISuccessResponse => {
+export const createSuccessResponse = ({
+            ok = false,
+            result = {}
+        }: IOptionalSuccessResponse
+    ): ISuccessResponse => {
     return {
-        ok: true,
-        result: {}
+        ok,
+        result
     };
 };
 
-export const createErrorResponse = (): IErrorResponse => {
+export const createErrorResponse = ({
+            ok = false,
+            err_code = 0,
+            description = "",
+        }: IOptionalErrorResponse
+    ): IErrorResponse => {
     return {
-        ok: false,
-        err_code: 0,
-        description: ""
+        ok,
+        err_code,
+        description
     };
 };
