@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import performanceLinearSearch from '../../../constants/algorithms/search/LinearSearch';
+import performanceLinearSearch from '../../../api/post/search/LinearSearch';
 import { createErrorResponse, createSuccessResponse } from '../../../constants/types/generators/Response';
 
 import TResponse from '../../../constants/types/Response';

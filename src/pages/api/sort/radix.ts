@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import performanceRadixSort from '../../../constants/algorithms/sort/RadixSort';
+import performanceRadixSort from '../../../api/post/sort/RadixSort';
 import { createErrorResponse, createSuccessResponse } from '../../../constants/types/generators/Response';
 
 import TResponse from '../../../constants/types/Response';

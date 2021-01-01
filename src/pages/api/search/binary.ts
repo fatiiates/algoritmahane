@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import performanceBinarySearch from '../../../constants/algorithms/search/BinarySearch';
+import performanceBinarySearch from '../../../api/post/search/BinarySearch';
 import { createErrorResponse, createSuccessResponse } from '../../../constants/types/generators/Response';
 
 import TResponse from '../../../constants/types/Response';

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import performanceBucketSort from '../../../constants/algorithms/sort/BucketSort';
+import performanceBucketSort from '../../../api/post/sort/BucketSort';
 import { createErrorResponse, createSuccessResponse } from '../../../constants/types/generators/Response';
 
 import TResponse from '../../../constants/types/Response';
