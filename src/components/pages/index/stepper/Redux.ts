@@ -1,17 +1,17 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as rootDrawerActions from '../../../../redux/actions/root/drawerActions';
+import * as indexActions from '../../../../redux/actions/pages/indexActions';
 
 function mapState(state) {
     return {
-        openDrawer: state.rootDrawerReducers
+        activeStep: state.pagesIndexStepperReducers
     }
 }
 
 function mapDispatch(dispatch) {
     return {
         actions: {
-            changeDrawer: bindActionCreators(rootDrawerActions.changeDrawer, dispatch),
+            changeStepperActiveStep: bindActionCreators(indexActions.changeStepperActiveStep, dispatch),
         },
     }
 }

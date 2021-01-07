@@ -12,7 +12,10 @@ const initialState: TypeState = {
                 search: [],
                 sort: []
             },
-            SELECTED_ALGORITHM: ""
+            SELECTED_ALGORITHM: "",
+            STEPPER: {
+                ACTIVE_STEP: 0
+            }
         }
     }
 };

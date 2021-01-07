@@ -22,13 +22,29 @@ export const styles = (theme: Theme) => createStyles({
         justifyContent: 'flex-end',
     },
     cardRoot: {
-        width: '100%'
+        width: '70%',
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+        },
     },
     cardDisplayContents: {
         minWidth: 275,
-        display: 'contents'
+        display: 'contents',
+    },
+    cardContent: {
+        [theme.breakpoints.up('xs')]: {
+            minWidth: 300
+        },
+    },
+    buttonGrid: {
+        marginBottom: theme.spacing(1)
+    },
+    icon: {
+        marginRight: theme.spacing(1)
     },
     cardTitle: {
-        fontSize: 14,
+        fontSize: 16,
+        display: 'flex',
+        alignItems: 'center'
     },
 });

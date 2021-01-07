@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import changeRootDrawer from './root/drawerReducers';
-import pagesIndexReducers from './pages/indexReducers';
+import rootDrawerReducers from './root/drawerReducers';
+import pagesIndexAlgorithmsReducers from './pages/index/algorithms';
+import pagesIndexStepperReducers from './pages/index/stepper';
 
 const rootReducer = combineReducers({
-    changeRootDrawer,
-    pagesIndexReducers
+    rootDrawerReducers,
+    pagesIndexAlgorithmsReducers,
+    pagesIndexStepperReducers
 });
 
 export default rootReducer;
