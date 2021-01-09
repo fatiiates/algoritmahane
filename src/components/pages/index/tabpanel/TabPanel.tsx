@@ -7,9 +7,6 @@ import { connector } from './Redux';
 import { TPanelProps, IPanelState, ITabPanelProps } from './Types';
 import { styles } from './Styles';
 
-
-
-
 function TabPanel(props: ITabPanelProps) {
     const { children, value, index, ...other } = props;
 
@@ -52,7 +49,7 @@ class Index extends React.Component<TPanelProps, IPanelState>{
     render() {
 
         const { value } = this.state;
-        const { classes, children } = this.props;
+        const { classes } = this.props;
 
         return (
             <div className={classes.root}>

@@ -11,10 +11,10 @@ import Stepper from './stepper';
 import { connector } from './Redux';
 import type { TIndexProps } from './Types';
 import { styles } from './Styles';
-import { Button, Card, CardContent, Grid, Icon, Typography } from '@material-ui/core';
+import { Button, Card, CardContent, FormControlLabel, Grid, Icon, Switch, TextField, Typography } from '@material-ui/core';
 import TabPanel from './tabpanel';
 import { Search } from '@material-ui/icons';
-
+import axios from 'axios';
 
 class Index extends React.Component<TIndexProps>{
 
@@ -22,18 +22,83 @@ class Index extends React.Component<TIndexProps>{
         super(props);
     }
 
-    handleNext = () => {
+    handleNext = async (algorithm: any) => {
+        const self = this;
+        await axios({
+            method: 'post',
+            url: 'http://localhost:3000/api/' + algorithm.endPoint,
+            data: {
+                array: "1,2",
+                searched: "1"
+            }
+        })
+            .then(async function (res) {
+                "use strict";
+                algorithm['info'] = res.data.result.algorithmInfo;
+                console.log(res.data.result);
+                self.props.actions.changeSelectedAlgorithm(algorithm);
+            })
+            .catch(function (err) {
+                throw new Error(err.message);
+            });
+
         this.props.actions.changeStepperActiveStep(this.props.activeStep + 1);
+
+    }
+
+    changeSwitchDataset = async () => {
+
+        await this.props.actions.changeSwitchDataset(!this.props.switchDataset)
     }
 
     render() {
-        const { classes, children, algorithms } = this.props;
+        const { classes, switchDataset, algorithms } = this.props;
 
         const steps = [
             'Algoritmanızı seçiniz.',
             'Veri seti giriniz/oluşturunuz.'
         ];
-        
+
+        const datasetInput = () => {
+            return switchDataset ?
+                <Grid xs={8}>
+                    <Typography variant="h5" align="center">
+                        Veri setinizi aşağıdaki metin kutusuna giriniz.
+                    </Typography>
+                    <TextField
+                        label="Veri seti"
+                        variant="outlined"
+                        placeholder="1.5, 2, 3.2, 5.6, 7"
+                        rows={6}
+                        multiline
+                        fullWidth
+                    />
+                </Grid>
+                :
+                <Grid>
+                    <Typography variant="h5" align="center">
+                        Veri setinizin özelliklerini belirleyiniz.
+                    </Typography>
+                    <TextField
+                        label="Üretilecek sayı"
+                        variant="outlined"
+                        className={classes.textField}
+                    />
+                    <TextField
+                        label="Sayı aralığı - Min"
+                        variant="outlined"
+                        className={classes.textField}
+                    />
+                    <TextField
+                        label="Sayı aralığı - Max"
+                        variant="outlined"
+                        className={classes.textField}
+                    />
+                </Grid>
+        }
+
+        const typeOfAlgorithm = this.props.selectedAlgorithm.endPoint.split('/')[0] == 'search' ? 'arama' : 'sıralama';
+
         const getStepContent = (step: any) => {
             switch (step) {
                 case 0:
@@ -61,7 +126,7 @@ class Index extends React.Component<TIndexProps>{
                                                                             variant="outlined"
                                                                             color="primary"
                                                                             endIcon={<TrendingFlatIcon />}
-                                                                            onClick={this.handleNext}
+                                                                            onClick={e => this.handleNext(algorithm)}
                                                                         >
                                                                             {algorithm.name}
                                                                         </Button>
@@ -87,7 +152,7 @@ class Index extends React.Component<TIndexProps>{
                                                                             variant="outlined"
                                                                             color="secondary"
                                                                             endIcon={<TrendingFlatIcon />}
-                                                                            onClick={this.handleNext}
+                                                                            onClick={e => this.handleNext(algorithm)}
                                                                         >
                                                                             {algorithm.name}
                                                                         </Button>
@@ -96,31 +161,111 @@ class Index extends React.Component<TIndexProps>{
                                                             </CardContent>
                                                         </Card>
                                                     </Grid>
-
                                                 </Grid>
                                             </Grid>
                                         </CardContent>
                                     </Card>
                                 </Grid>
                             }
-                            {/*<TabPanel></TabPanel>*/}
                         </Main>
                     );
                 case 1:
                     return (
-                        "2bu bir test yazısı"
+                        <div>
+                            {
+                                algorithms &&
+                                <Main>
+                                    <Typography variant="h5" align="center">
+                                        Hmm. Bu bir {typeOfAlgorithm} algoritması. Güzel seçim!
+                                    </Typography>
+                                    <Grid justify="center" container>
+                                        <Card className={classes.cardRoot}>
+                                            <Grid className={classes.infoGrid}>
+                                                <Card className={classes.cardDisplayContents}>
+                                                    <CardContent className={classes.cardContent}>
+                                                        <Typography variant="h6">
+                                                            # Bilgilendirme
+                                                        </Typography>
+                                                        <Typography>
+                                                            &emsp;Seçtiğiniz algoritma: {this.props.selectedAlgorithm.name}
+                                                        </Typography>
+                                                        <Card className={classes.cardDisplayContents}>
+                                                            <CardContent className={classes.cardContent}>
+                                                                <Typography variant="subtitle2">
+                                                                    ## Kısaca {this.props.selectedAlgorithm.name}
+                                                                </Typography>
+                                                                <Typography>
+                                                                    {this.props.selectedAlgorithm.info + ""}
+                                                                </Typography>
+                                                            </CardContent>
+                                                        </Card>
+                                                    </CardContent>
+                                                </Card>
+                                                <Card className={classes.cardDisplayContents}>
+                                                    <CardContent className={classes.cardContent}>
+                                                        <Typography variant="h6">
+                                                            # Veri seti kısıtlamaları
+                                                        </Typography>
+                                                        <Typography>
+                                                            &emsp;1- Verileriniz gerçel sayılardan oluşmalıdır.<br />
+                                                            &emsp;2- Her veri ','(virgül) ile ayrılmalıdır. <br />
+                                                            &emsp;3- Ondalıklı veriler için '.'(nokta) ayracı kullanılmalıdır.
+                                                        </Typography>
+                                                    </CardContent>
+                                                </Card>
+                                            </Grid>
+                                            <Grid justify="center" className={classes.datasetGrid} container>
+                                                <Grid xs={12} item>
+                                                    <Grid
+                                                        onClick={this.changeSwitchDataset}
+                                                        className={classes.chooseDatasetGrid}
+                                                        justify="center"
+                                                        container
+                                                    >
+                                                        <Typography
+                                                            variant="button"
+                                                            align="center"
+                                                            className={classes.flexbox}
+                                                        >
+                                                            Rastgele veri seti
+                                                        <FormControlLabel
+                                                                classes={{ root: classes.formControlLabel }}
+                                                                control={
+                                                                    <Switch
+                                                                        classes={{ switchBase: classes.switchBase, track: classes.switchTrack }}
+                                                                        checked={this.props.switchDataset}
+                                                                        color="primary"
+                                                                    />
+                                                                }
+                                                                label=""
+                                                            />
+                                                            <Typography variant="button">
+                                                                Özel veri seti
+                                                            </Typography>
+                                                        </Typography>
+                                                    </Grid>
+
+                                                    <Grid justify="center" container>
+                                                        {datasetInput()}
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Card>
+                                    </Grid>
+                                </Main>
+                            }
+                        </div>
                     );
                 default:
                     return 'Adım bulunamadı.';
             }
         }
 
-
         return (
             <Template>
                 <Main>
-                    <Typography variant="h3">
-                        SIRALA, ARA
+                    <Typography variant="h2">
+                        Haydi, başlayalım!
                     </Typography>
                     <Stepper
                         steps={steps}

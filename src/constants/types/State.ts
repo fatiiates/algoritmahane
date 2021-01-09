@@ -7,10 +7,11 @@ interface TypeState {
     PAGES: {
         INDEX: {
             ALGORITHMS: object,
-            SELECTED_ALGORITHM: string,
+            SELECTED_ALGORITHM: object,
             STEPPER: {
                 ACTIVE_STEP: number
-            }
+            },
+            SWITCH_DATASET: boolean
         }
     }
 }

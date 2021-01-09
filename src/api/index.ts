@@ -2,41 +2,41 @@
 const algorithms = {
     "search": [
         {
-            endPoint: "binarySearch",
+            endPoint: "search/binary",
             name: "İkili Arama"
         },
         {
-            endPoint: "linearSearch",
+            endPoint: "search/linear",
             name: "Doğrusal Arama"
         }
     ],
     "sort": [
         {
-            endPoint: "bucketSort",
+            endPoint: "sort/bucket",
             name: "Kova Sıralama"
         },
         {
-            endPoint: "countingSort",
+            endPoint: "sort/counting",
             name: "Sayma Sıralaması"
         },
         {
-            endPoint: "heapSort",
+            endPoint: "sort/heap",
             name: "Yığın Sıralaması"
         },
         {
-            endPoint: "insertionSort",
+            endPoint: "sort/insertion",
             name: "Araya Ekleme Sıralaması"
         },
         {
-            endPoint: "mergeSort",
+            endPoint: "sort/merge",
             name: "Birleştirme Sıralaması"
         },
         {
-            endPoint: "quickSort",
+            endPoint: "sort/quick",
             name: "Hızlı Sıralama"
         },
         {
-            endPoint: "radixSort",
+            endPoint: "sort/radix",
             name: "Kök Sıralaması"
         }
     ]

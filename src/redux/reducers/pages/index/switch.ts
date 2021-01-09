@@ -1,10 +1,10 @@
 import * as actionTypes from '../../../actions/actionTypes';
 import initialState from '../../initialState';
 
-function changeStepperActiveStep(state=initialState.PAGES.INDEX.STEPPER.ACTIVE_STEP, action){
-
+function changeSwitchDataset(state=initialState.PAGES.INDEX.SWITCH_DATASET, action){
+    
     switch (action.type) {
-        case actionTypes.CHANGE_INDEX_STEPPER_ACTIVE_STEP_DATA:
+        case actionTypes.CHANGE_INDEX_SWITCH_DATASET_DATA:
             return action.payload;
         default:
             return state;
@@ -12,4 +12,4 @@ function changeStepperActiveStep(state=initialState.PAGES.INDEX.STEPPER.ACTIVE_S
 
 }
 
-export default changeStepperActiveStep;
+export default changeSwitchDataset;

@@ -5,7 +5,9 @@ import * as indexActions from '../../../redux/actions/pages/indexActions';
 function mapState(state) {
     return {
         algorithms: state.pagesIndexAlgorithmsReducers,
-        activeStep: state.pagesIndexStepperReducers
+        selectedAlgorithm: state.pagesIndexSelectedAlgorithmReducers,
+        activeStep: state.pagesIndexStepperReducers,
+        switchDataset: state.pagesIndexSwitchDataset
     }
 }
 
@@ -13,7 +15,9 @@ function mapDispatch(dispatch) {
     return {
         actions: {
             changeAlgorithms: bindActionCreators(indexActions.changeAlgorithms, dispatch),
+            changeSelectedAlgorithm: bindActionCreators(indexActions.changeSelectedAlgorithm, dispatch),
             changeStepperActiveStep: bindActionCreators(indexActions.changeStepperActiveStep, dispatch),
+            changeSwitchDataset: bindActionCreators(indexActions.changeSwitchDataset, dispatch),
         },
     }
 }

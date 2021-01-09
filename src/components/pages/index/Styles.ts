@@ -10,6 +10,11 @@ export const styles = (theme: Theme) => createStyles({
         margin: 0,
         width: '100%',
     },
+    flexbox: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     content: {
         flexGrow: 1,
         maxWidth: '100%',
@@ -41,6 +46,29 @@ export const styles = (theme: Theme) => createStyles({
     },
     icon: {
         marginRight: theme.spacing(1)
+    },
+    infoGrid: {
+        padding: theme.spacing(4)
+    },
+    datasetGrid: {
+        padding: theme.spacing(4),
+    },
+    formControlLabel: {
+        marginLeft: theme.spacing(0),
+        marginRight: theme.spacing(0),
+    },
+    switchBase: {
+        color: theme.palette.secondary.main,
+    },
+    switchTrack: {
+        backgroundColor: theme.palette.secondary.light 
+    },
+    chooseDatasetGrid: {
+        cursor: 'pointer'
+    },
+    textField: {
+        width: 150,
+        marginRight: theme.spacing(2)
     },
     cardTitle: {
         fontSize: 16,
