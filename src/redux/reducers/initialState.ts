@@ -21,6 +21,9 @@ const initialState: TypeState = {
                 ACTIVE_STEP: 1
             },
             SWITCH_DATASET: true
+        },
+        RESULT: {
+            OUT: {}
         }
     }
 };

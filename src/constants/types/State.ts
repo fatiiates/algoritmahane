@@ -12,6 +12,9 @@ interface TypeState {
                 ACTIVE_STEP: number
             },
             SWITCH_DATASET: boolean
+        },
+        RESULT: {
+            OUT: object
         }
     }
 }

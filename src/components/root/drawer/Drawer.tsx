@@ -13,14 +13,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import SearchIcon from '@material-ui/icons/Search';
+import SortIcon from '@material-ui/icons/Sort';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Collapse from '@material-ui/core/Collapse';
-import StarBorder from '@material-ui/icons/StarBorder';
 
 import { connector } from './Redux';
 import { TDrawerProps, IDrawerState } from './Types';
 import { styles } from './Styles';
+import Link from 'next/link';
 
 class MyDrawer extends React.Component<TDrawerProps, IDrawerState>{
     constructor(props: TDrawerProps) {
@@ -42,11 +43,11 @@ class MyDrawer extends React.Component<TDrawerProps, IDrawerState>{
     handleDrawerToggle = (): void => {
         this.props.actions.changeDrawer(!this.props.openDrawer);
     }
-    
+
     render() {
 
         const { openDrawerDropDown } = this.state;
-        const { classes, window, openDrawer } = this.props;
+        const { classes, window, openDrawer, algorithms } = this.props;
 
         const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -65,59 +66,46 @@ class MyDrawer extends React.Component<TDrawerProps, IDrawerState>{
                         coupleS
                     </Typography>
                 </div>
-                <Divider />
+                <Divider/>
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
                     <ListItem button data-drop="1" onClick={this.handleDrawerDropDown}>
                         <ListItemIcon>
-                            <InboxIcon />
+                            <SearchIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Inbox" />
+                        <ListItemText primary="Arama Algoritmaları" />
                         {openDrawerDropDown == 1 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={openDrawerDropDown == 1} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <ListItem button className={classes.nested}>
-                                <ListItemIcon>
-                                    <StarBorder />
-                                </ListItemIcon>
-                                <ListItemText primary="Starred" />
-                            </ListItem>
+                            {algorithms.search.map((algorithm) => (
+                                <Link key={`${algorithm.name}-search-drawer-column`} href={`/info/${algorithm.endPoint}`}>
+                                    <ListItem button className={classes.nested}>
+                                        <ListItemText primary={algorithm.name} />
+                                    </ListItem>
+                                </Link>
+                            ))}
                         </List>
                     </Collapse>
                     <ListItem button data-drop="2" onClick={this.handleDrawerDropDown}>
                         <ListItemIcon>
-                            <InboxIcon />
+                            <SortIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Inbox" />
+                        <ListItemText primary="Sıralama Algoritmaları" />
                         {openDrawerDropDown == 2 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={openDrawerDropDown == 2} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <ListItem button className={classes.nested}>
-                                <ListItemIcon>
-                                    <StarBorder />
-                                </ListItemIcon>
-                                <ListItemText primary="Starred" />
-                            </ListItem>
+                            {algorithms.sort.map((algorithm) => (
+                                <Link key={`${algorithm.name}-sort-drawer-column`} href={`/info/${algorithm.endPoint}`}>
+                                    <ListItem button className={classes.nested}>
+                                        <ListItemText primary={algorithm.name} />
+                                    </ListItem>
+                                </Link>
+                            ))}
                         </List>
                     </Collapse>
                 </List>
-            </div>
+            </div >
         );
 
         return (

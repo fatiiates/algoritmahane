@@ -63,12 +63,31 @@ export const styles = (theme: Theme) => createStyles({
     switchTrack: {
         backgroundColor: theme.palette.secondary.light 
     },
-    chooseDatasetGrid: {
-        cursor: 'pointer'
-    },
     textField: {
         width: 150,
         marginRight: theme.spacing(2)
+    },
+    resultButton: {
+        backgroundColor: theme.palette.secondary.main,
+        color: '#fff',
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.dark
+        },
+        fontSize: theme.spacing(2.5),
+        margin: theme.spacing(3)
+    },
+    randomDatasetTyporgraphy: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'pointer'
+    },
+    infoButton: {
+        backgroundColor: theme.palette.info.main,
+        color: '#fff',
+        '&:hover': {
+            backgroundColor: theme.palette.info.dark
+        },
     },
     cardTitle: {
         fontSize: 16,

@@ -1,7 +1,7 @@
 import { ISuccessResponse, IErrorResponse, IOptionalSuccessResponse, IOptionalErrorResponse } from "../Response";
 
 export const createSuccessResponse = ({
-            ok = false,
+            ok = true,
             result = {}
         }: IOptionalSuccessResponse
     ): ISuccessResponse => {

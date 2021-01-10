@@ -4,7 +4,8 @@ import * as rootDrawerActions from '../../../redux/actions/root/drawerActions';
 
 function mapState(state) {
     return {
-        openDrawer: state.rootDrawerReducers
+        openDrawer: state.rootDrawerReducers,
+        algorithms: state.pagesIndexAlgorithmsReducers,
     }
 }
 

@@ -9,6 +9,9 @@ const theme: Theme = createMuiTheme({
             },
         },
     },
+    typography: {
+        fontFamily: 'Raleway, Arial',
+    },
     palette: {
         type: 'light',
         primary: {

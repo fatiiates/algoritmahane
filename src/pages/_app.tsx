@@ -7,7 +7,8 @@ import theme from '../components/material/Theme';
 
 import configureStore from '../redux/reducers/configureStore';
 import wrapper from '../redux/reducers/wrapper';
-import { Provider } from 'react-redux';
+import axios from 'axios';
+import * as indexActions from '../redux/actions/pages/indexActions';
 
 //const store = configureStore();
 
@@ -20,6 +21,30 @@ class MyApp extends App<AppInitialProps> {
             jssStyles.parentElement!.removeChild(jssStyles);
         }
     }
+
+    public static getInitialProps = async ({Component, ctx}: AppContext) => {
+        
+        await axios({
+            method: 'post',
+            url: 'http://localhost:3000/api'
+        })
+            .then(async function (res) {
+                await ctx.store.dispatch(indexActions.changeAlgorithms(res.data.result));
+            })
+            .catch(function (err) {
+                throw new Error(err.message);
+            });
+
+        return {
+            pageProps: {
+                // Call page-level getInitialProps
+                ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+                // Some custom thing for all pages
+                pathname: ctx.pathname,
+            },
+        };
+
+    };
 
     public render() {
         const { Component, pageProps } = this.props;
