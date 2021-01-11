@@ -4,9 +4,9 @@
 
 Algoritmanın zaman karmaşıklığı, aşağıda gösterildiği gibidir.
 
-           | O(1)  en iyi durum
-    T(n) = | O(log n) en kötü durum
-           | O(log n) ortalama durum
+           | O(n*logn)  en iyi durum
+    T(n) = | O(n^2) en kötü durum
+           | O(n*log n) ortalama durum
            
 Algoritmanın iteratif denklemi ise:
 
