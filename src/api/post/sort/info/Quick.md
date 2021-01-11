@@ -4,7 +4,7 @@
 
 Algoritmanın zaman karmaşıklığı, aşağıda gösterildiği gibidir.
 
-           | O(n*logn)  en iyi durum
+           | O(n)  en iyi durum
     T(n) = | O(n^2) en kötü durum
            | O(n*log n) ortalama durum
            
@@ -16,7 +16,7 @@ olarak ifade edilebilir.
 
 ### Çalışma Mantığı
 
-&emsp;Algoritmaya sıralanmış bir dizi ve aranacak eleman verildiğinde, dizinin ortasnda bulunan sayı ile aranan sayıyı karşılaştırılır ve bu işlem sayı bulunana kadar veya eldeki dizide bir ifade kalmayana kadar devam eder. Algoritma sonucunda örnek olarak aranan eleman bulunamadıysa geriye -1, aranan eleman bulunduysa dizideki indisi döndürülerek sonlandırılır.
+&emsp;Algoritmaya bir dizi verildiğinde, herhangi bir sayı pivot olarak seçilir(genellikle ilk eleman). Dizide pivottan küçük olan sayıların pivottan düşük indislere, pivottan büyük olan sayıların pivottan yüksek indislerde olacak halde güncellenir. Oluşan alt ve üst diziler için hızlı sıralama algoritması tekrar çağrılır. En son olarak sıralanmış dizi geriye döndürülür.
 
 ### Sözde Kodu
 
