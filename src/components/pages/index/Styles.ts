@@ -94,4 +94,7 @@ export const styles = (theme: Theme) => createStyles({
         display: 'flex',
         alignItems: 'center'
     },
+    form: {
+        width: '100%'
+    }
 });

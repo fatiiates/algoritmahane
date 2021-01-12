@@ -10,7 +10,7 @@ Algoritmanın zaman karmaşıklığı, aşağıda gösterildiği gibidir.
 
 ### Çalışma Mantığı
 
-&emsp;Algoritmaya bir dizi verildiğinde, her seferinde dizinin en başından sonuna doğru diziyi tarayarak, dizinin bir elemanını alıp geriye doğru elemanlar ile bir bir sıralar. Her sıralamada gelinen indis eldeki elemandan daha küçük ise o elemanla yer değiştirerek bir adım ilerler.
+&emsp;Algoritmaya bir dizi verildiğinde, her dizi elemanı için şu işlemler gerçekleşir: Elemandan kendinden önceki sayılar ile karşılaştırılmaya başlanır. Karşılaştırıldığı sayıdan daha küçük ise o sayı ile yer değiştirilir. Ve sıradaki eleman için döngü dönmeye devam eder. En son olarak geriye sıralanmış dizi döndürülür.
 
 ### Sözde Kodu
 

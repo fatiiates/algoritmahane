@@ -17,9 +17,9 @@ const Default = ({ props }) => {
     );
 }
 
-Default.getInitialProps = async ({ query }) => {
+Default.getInitialProps = async ({ req, query }) => {
     try {
-
+        console.log(req);
         var result = null;
         await axios({
             method: 'post',

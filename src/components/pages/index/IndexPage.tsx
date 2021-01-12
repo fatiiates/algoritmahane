@@ -77,6 +77,7 @@ class Index extends React.Component<TIndexProps>{
                         label="Veri seti"
                         variant="outlined"
                         placeholder="1.5, 2, 3.2, 5.6, 7"
+                        name="dataset"
                         rows={6}
                         multiline
                         fullWidth
@@ -183,7 +184,7 @@ class Index extends React.Component<TIndexProps>{
                             {
                                 algorithms &&
                                 <Main>
-                                    <form action={`/sonuc/${selectedAlgorithm.endPoint}`} method="POST">
+                                    <form className={classes.form} action={`/result/${selectedAlgorithm.endPoint}`} method="POST">
                                         <Typography variant="h5" align="center">
                                             Hmm. Bu bir {typeOfAlgorithm} algoritması. Güzel seçim!
                                         </Typography>
@@ -236,11 +237,12 @@ class Index extends React.Component<TIndexProps>{
                                                                 className={classes.randomDatasetTyporgraphy}
                                                             >
                                                                 Rastgele veri seti
-                                                            <FormControlLabel
+                                                                <FormControlLabel
                                                                     classes={{ root: classes.formControlLabel }}
                                                                     control={
                                                                         <Switch
                                                                             classes={{ switchBase: classes.switchBase, track: classes.switchTrack }}
+                                                                            name="checked"
                                                                             checked={this.props.switchDataset}
                                                                             color="primary"
                                                                         />
@@ -261,11 +263,12 @@ class Index extends React.Component<TIndexProps>{
                                                                     onClick={this.handleBack}
                                                                 >
                                                                     Geri
-                                                            </Button>
+                                                                </Button>
                                                                 <Button
                                                                     variant="contained"
                                                                     className={classes.resultButton}
                                                                     endIcon={<DoneOutlineIcon />}
+                                                                    name="button"
                                                                     type="submit"
                                                                 >
                                                                     Sonuçları gör
@@ -277,7 +280,7 @@ class Index extends React.Component<TIndexProps>{
                                                                         endIcon={<InfoIcon />}
                                                                     >
                                                                         Daha fazla bilgi
-                                                                </Button>
+                                                                    </Button>
                                                                 </Link>
                                                             </Grid>
                                                         </Grid>
