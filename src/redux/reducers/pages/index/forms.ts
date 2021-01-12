@@ -1,13 +1,15 @@
 import * as actionTypes from '../../../actions/actionTypes';
 import initialState from '../../initialState';
 
-export function changeOut(state=initialState.PAGES.RESULT.OUT, action){
-    
+function changeFormsDataset(state=initialState.PAGES.INDEX.FORMS.DATASET, action){
+
     switch (action.type) {
-        case actionTypes.CHANGE_RESULT_OUT_DATA:
+        case actionTypes.CHANGE_INDEX_FORMS_DATASET:
             return action.payload;
         default:
             return state;
     }
+
 }
 
+export default changeFormsDataset;

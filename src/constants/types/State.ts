@@ -11,10 +11,14 @@ interface TypeState {
             STEPPER: {
                 ACTIVE_STEP: number
             },
-            SWITCH_DATASET: boolean
-        },
-        RESULT: {
-            OUT: object
+            SWITCH_DATASET: boolean,
+            OUT: object,
+            FORMS: {
+                DATASET: {
+                    SPECIAL_DATASET: object,
+                    RANDOM_DATASET: object
+                }
+            }
         }
     }
 }

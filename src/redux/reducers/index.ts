@@ -4,7 +4,8 @@ import { changeAlgorithms as pagesIndexAlgorithmsReducers } from './pages/index/
 import { changeSelectedAlgorithm as pagesIndexSelectedAlgorithmReducers } from './pages/index/algorithms';
 import pagesIndexStepperReducers from './pages/index/stepper';
 import pagesIndexSwitchDataset from './pages/index/switch';
-import { changeOut as pagesResultOut} from './pages/result/out';
+import { changeOut as pagesIndexOut} from './pages/index/out';
+import pagesIndexFormsDataset from './pages/index/forms';
 
 const rootReducer = combineReducers({
     rootDrawerReducers,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     pagesIndexSelectedAlgorithmReducers,
     pagesIndexStepperReducers,
     pagesIndexSwitchDataset,
-    pagesResultOut
+    pagesIndexOut,
+    pagesIndexFormsDataset
 });
 
 export default rootReducer;

@@ -15,3 +15,15 @@ export function changeStepperActiveStep(value) {
 export function changeSwitchDataset(value) {
     return { type: actionTypes.CHANGE_INDEX_SWITCH_DATASET_DATA, payload: value };
 }
+
+export function changeOut(value) {
+    return { type: actionTypes.CHANGE_INDEX_OUT_DATA, payload: value };
+}
+
+export function changeFormsDatasetSpecialDataset(value) {
+    return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_SPECIAL_DATASET, payload: value };
+}
+
+export function changeFormsDatasetRandomDataset(value) {
+    return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_SPECIAL_DATASET, payload: value };
+}

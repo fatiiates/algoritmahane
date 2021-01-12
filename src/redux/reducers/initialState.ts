@@ -8,22 +8,25 @@ const initialState: TypeState = {
     },
     PAGES: {
         INDEX: {
-            ALGORITHMS: {
-                search: [],
-                sort: []
-            },
-            SELECTED_ALGORITHM: {
-                name: "",
-                endPoint: "",
-                info: ""
-            },
+            ALGORITHMS: null,
+            SELECTED_ALGORITHM: null,
             STEPPER: {
-                ACTIVE_STEP: 1
+                ACTIVE_STEP: 0
             },
-            SWITCH_DATASET: true
-        },
-        RESULT: {
-            OUT: {}
+            SWITCH_DATASET: true,
+            OUT: null,
+            FORMS: {
+                DATASET: {
+                    SPEACIAL_DATASET: {
+                        ERROR_TEXT: '',
+                        TEXT: ''
+                    },
+                    RANDOM_DATASET: {
+                        ERROR_TEXT: '',
+                        TEXT: ''
+                    }
+                }
+            }
         }
     }
 };

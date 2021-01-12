@@ -2,7 +2,6 @@ export interface IPerformance {
     numberOfTransactions: number;
     performance: number;
     readonly dataset: string;
-    readonly algorithmInfo: string;
 }
 
 export interface ISearchPerformance extends IPerformance {
@@ -18,7 +17,6 @@ export interface IOptionalPerformance {
     numberOfTransactions?: number;
     performance?: number;
     dataset?: string;
-    algorithmInfo?: string;
 }
 
 export interface IOptionalSearchPerformance extends IOptionalPerformance {

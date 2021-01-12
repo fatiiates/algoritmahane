@@ -2,8 +2,8 @@ import { WithStyles } from '@material-ui/core/styles';
 import { styles } from './Styles';
 import { TPropsFromRedux } from './Redux';
 
-export interface Props extends WithStyles<typeof styles>{
+export interface Props extends WithStyles<typeof styles> {
     children?: React.ReactNode;
 }
 
-export type TIndexProps = TPropsFromRedux & Props
+export type TFormProps = TPropsFromRedux & Props

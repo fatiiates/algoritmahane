@@ -7,7 +7,8 @@ function mapState(state) {
         algorithms: state.pagesIndexAlgorithmsReducers,
         selectedAlgorithm: state.pagesIndexSelectedAlgorithmReducers,
         activeStep: state.pagesIndexStepperReducers,
-        switchDataset: state.pagesIndexSwitchDataset
+        switchDataset: state.pagesIndexSwitchDataset,
+        out: state.pagesIndexOut
     }
 }
 
@@ -17,6 +18,7 @@ function mapDispatch(dispatch) {
             changeSelectedAlgorithm: bindActionCreators(indexActions.changeSelectedAlgorithm, dispatch),
             changeStepperActiveStep: bindActionCreators(indexActions.changeStepperActiveStep, dispatch),
             changeSwitchDataset: bindActionCreators(indexActions.changeSwitchDataset, dispatch),
+            changeOut: bindActionCreators(indexActions.changeOut, dispatch),
         },
     }
 }
