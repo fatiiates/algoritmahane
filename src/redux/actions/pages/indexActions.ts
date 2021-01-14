@@ -24,8 +24,15 @@ export function changeFormsDatasetSpecial(value) {
     return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_SPECIAL, payload: value };
 }
 
-export function changeFormsDatasetRandom(value) {
-    return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_RANDOM, payload: value };
+export function changeFormsDatasetRandom(value, type?) {
+    if(type == 'MIN')
+        return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_RANDOM_MIN, payload: value };
+    else if (type == 'MAX')
+        return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_RANDOM_MAX, payload: value };
+    else if (type == 'PIECE')
+        return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_RANDOM_PIECE, payload: value };
+    else
+        return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_RANDOM, payload: value };
 }
 
 export function changeFormsDatasetSearched(value) {

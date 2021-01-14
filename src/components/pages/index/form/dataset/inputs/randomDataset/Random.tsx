@@ -6,6 +6,7 @@ import { TextField, Typography } from '@material-ui/core';
 import { connector } from './Redux';
 import { TRandomProps } from './Types';
 import { styles } from './Styles';
+import { parse } from 'ts-node';
 
 class Random extends React.Component<TRandomProps>{
     minRef: any;
@@ -20,14 +21,14 @@ class Random extends React.Component<TRandomProps>{
     //setPieceRefValue = (e) => this.pieceRef = e.target.value;
 
     randomDatasetOnChange = async (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, key: string) => {
-        const re = /^-?\d{1,7}(\.\d{1,10})?$/;
+        const re = /^-?\d{1,7}?$/;
 
         if (event.target.value.length < 1)
-            this.props.actions.changeRandomDataSet(state => (state[key] = null, state));
+            this.props.actions.changeRandomDataSet(null, key);
         else if (!re.exec(event.target.value))
-            this.props.actions.changeRandomDataSet(state => (state[key] = '', state));
+            this.props.actions.changeRandomDataSet('', key);
         else
-            this.props.actions.changeRandomDataSet(state => (state[key] = event.target.value, state));
+            this.props.actions.changeRandomDataSet( event.target.value, key);
     }
 
     componentWillUnmount = async () => {
@@ -37,7 +38,8 @@ class Random extends React.Component<TRandomProps>{
 
     render() {
         const { classes } = this.props;
-        
+        const { MAX, MIN, PIECE } = this.props.randomDataset;
+        console.log( MAX, MIN, PIECE);
         return (
             <React.Fragment >
                 <Typography variant="h5" align="center">
@@ -48,6 +50,7 @@ class Random extends React.Component<TRandomProps>{
                     variant="outlined"
                     className={classes.textField}
                     helperText=""
+                    error={parseInt(MAX) <= parseInt(MIN) || MIN == ''}
                     onChange={e => this.randomDatasetOnChange(e, 'MIN')}
                 />
                 <TextField
@@ -55,12 +58,14 @@ class Random extends React.Component<TRandomProps>{
                     variant="outlined"
                     className={classes.textField}
                     helperText=""
+                    error={parseInt(MAX) <= parseInt(MIN) || MAX == ''}
                     onChange={e => this.randomDatasetOnChange(e, 'MAX')}
                 />
                 <TextField
                     label="Üretilecek Adet"
                     variant="outlined"
                     className={classes.textField}
+                    error={(PIECE != null && PIECE < 2) || PIECE == ''}
                     onChange={e => this.randomDatasetOnChange(e, 'PIECE')}
                 />         
             </React.Fragment>

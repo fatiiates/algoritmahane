@@ -16,7 +16,11 @@ interface TypeState {
             FORMS: {
                 DATASET: {
                     SPECIAL_DATASET: string,
-                    RANDOM_DATASET: object,
+                    RANDOM_DATASET: {
+                        MIN: string,
+                        MAX: string,
+                        PIECE: string
+                    },
                     SEARCHED: string
                 }
             }
