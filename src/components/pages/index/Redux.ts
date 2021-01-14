@@ -11,6 +11,7 @@ function mapState(state) {
         out: state.pagesIndexOut,
         specialDataset: state.pagesIndexFormsDatasetSpecial,
         randomDataset: state.pagesIndexFormsDatasetRandom,
+        searched: state.pagesIndexFormsDatasetSearched,
     }
 }
 

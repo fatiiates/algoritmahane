@@ -12,11 +12,13 @@ import Link from 'next/link';
 import { connector } from './Redux';
 import type { TIndexProps } from './Types';
 import { styles } from './Styles';
-import { Button, Card, CardContent, FormControlLabel, Grid, Switch, TextField, Typography } from '@material-ui/core';
+import { Button, Card, CardContent, FormControlLabel, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import axios from 'axios';
 import InfoIcon from '@material-ui/icons/Info';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
+import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import DatasetForm from './form/dataset';
 
@@ -35,15 +37,72 @@ class Index extends React.Component<TIndexProps>{
 
     handleOut = async () => {
 
-        const { array, searched } = this.props.out;
         const self = this;
+        let data = null;
+
+        switch (this.props.switchDataset) {
+            case true: console.log(this.props.specialDataset);
+                if (this.props.specialDataset == null || this.props.specialDataset.length == 0)
+                    return 0;
+
+                if (this.props.selectedAlgorithm.endPoint.split('/')[0] == 'search')
+                    if (this.props.searched.length == null || this.props.searched.length == 0)
+                        return 0;
+                    else {
+                        data = {
+                            array: this.props.specialDataset,
+                            searched: this.props.searched
+                        }
+                        break;
+                    }
+
+                data = {
+                    array: this.props.specialDataset,
+                }
+
+                break;
+            case false: console.log(2);
+                if (this.props.randomDataset.MIN == null || this.props.randomDataset.MIN == 0)
+                    return 0;
+
+                if (this.props.randomDataset.MAX == null || this.props.randomDataset.MAX == 0)
+                    return 0;
+
+                if (this.props.randomDataset.PIECE == null || this.props.randomDataset.PIECE == 0)
+                    return 0;
+
+                const { MIN, MAX, PIECE } = this.props.randomDataset;
+
+                let numbers: Array<number> = Array.from(Array(PIECE).keys()).map(() => Math.floor(Math.random() * (MAX - MIN) + MIN));
+
+                if (this.props.selectedAlgorithm.endPoint.split('/')[0] == 'search')
+                    if (this.props.searched.length == null || this.props.searched.length == 0)
+                        return 0;
+                    else {
+
+                        data = {
+                            array: numbers,
+                            searched: this.props.searched
+                        }
+                        break;
+                    }
+                data = {
+                    array: numbers
+                }
+
+                break;
+            default:
+                data = null;
+                break;
+        }
+
+        if (data == null)
+            return 0;
+
         await axios({
             method: 'post',
             url: 'http://localhost:3000/api/' + this.props.selectedAlgorithm.endPoint,
-            data: {
-                array: this.props.switchDataset ? this.props.specialDataset.TEXT : this.props.randomDataset.TEXT,
-                searched
-            }
+            data: data
         })
             .then(async function (res) {
                 self.props.actions.changeOut(res.data.result);
@@ -223,7 +282,7 @@ class Index extends React.Component<TIndexProps>{
                                                                 </Typography>
                                                             </Grid>
                                                             <Grid justify="center" container>
-                                                                <DatasetForm/>
+                                                                <DatasetForm />
                                                                 <Grid>
                                                                     <Button
                                                                         color="default"
@@ -272,49 +331,48 @@ class Index extends React.Component<TIndexProps>{
                         performance,
                         sortedDataset
                     } = out;
+
                     return (
                         <Main>
                             <Grid justify="center" container>
                                 <Card className={classes.cardRoot}>
                                     <CardContent>
-                                        <Grid container>
-                                            <Grid xs={12} md={6} item>
-                                                <Typography variant="h5" align="center">
-                                                    Başarılı! Değerler elimize ulaştı.
-                                                </Typography>
-                                                {
-                                                    dataset && <Grid justify="center" container>
-                                                        <Typography variant="h3" >Girilen Veri Seti</Typography>
-                                                        <Typography>{dataset}</Typography>
-                                                    </Grid>
-                                                }
-                                                {
-                                                    performance && <Grid justify="center" container>
-                                                        <Typography variant="h3" >Performans</Typography>
-                                                        <Typography>
-                                                            {`${performance * Math.pow(10, 6)} mikro saniye içerisinde gerçekleştirildi.`}
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                                {
-                                                    numberOfTransactions && <Grid justify="center" container>
-                                                        <Typography variant="h3" >İşlem Sayısı</Typography>
-                                                        <Typography>Tam olarak {numberOfTransactions} işlem gerçekleştirildi.</Typography>
-                                                    </Grid>
-                                                }
-                                                {
-                                                    sortedDataset && <Grid justify="center" container>
-                                                        <Typography variant="h3" >Sıralanmış Veri Seti</Typography>
-                                                        <Typography>{sortedDataset}</Typography>
-                                                    </Grid>
-                                                }
-                                                {
-                                                    index && <Grid justify="center" container>
-                                                        <Typography variant="h3" >Arama Sonucu</Typography>
-                                                        <Typography>Aradığınız eleman {out.dataset}. indekste bulunuyor</Typography>
-                                                    </Grid>
-                                                }
-                                            </Grid>
+                                        <Grid className={classes.resultGrid} justify="center" container>
+                                            <Typography className={classes.resultTitle} variant="h3" align="center">
+                                                Başarılı! Değerler elimize ulaştı.
+                                            </Typography>
+                                            <TableContainer component={Paper}>
+                                                <Table aria-label="caption table">
+                                                    <TableHead>
+                                                        <TableRow>
+                                                            <TableCell><strong>Öznitelik</strong></TableCell>
+                                                            <TableCell align="center"><strong>Değerler</strong></TableCell>
+                                                        </TableRow>
+                                                    </TableHead>
+                                                    <TableBody>                                         
+                                                        {performance && <TableRow >
+                                                            <TableCell><UpdateRoundedIcon /> Performans</TableCell>
+                                                            <TableCell align="center">{`${(performance * 1000).toFixed(3)} milisaniye içerisinde gerçekleştirildi.`}</TableCell>
+                                                        </TableRow>}
+                                                        {numberOfTransactions && <TableRow >
+                                                            <TableCell><SettingsEthernetIcon /> İşlem Sayısı</TableCell>
+                                                            <TableCell align="center">Tam olarak {numberOfTransactions} işlem gerçekleştirildi.</TableCell>
+                                                        </TableRow>}
+                                                        {index && <TableRow >
+                                                            <TableCell><UpdateRoundedIcon /> Arama Sonucu</TableCell>
+                                                            <TableCell align="center">Aradığınız eleman {index}. indekste bulunuyor</TableCell>
+                                                        </TableRow>}
+                                                        {sortedDataset && <TableRow >
+                                                            <TableCell><UpdateRoundedIcon /> Sıralanmış Veri Seti</TableCell>
+                                                            <TableCell align="center">{sortedDataset}</TableCell>
+                                                        </TableRow>}
+                                                        {dataset && <TableRow >
+                                                            <TableCell><UpdateRoundedIcon /> Girilen veri seti</TableCell>
+                                                            <TableCell align="center">{dataset}</TableCell>
+                                                        </TableRow>}
+                                                    </TableBody>
+                                                </Table>
+                                            </TableContainer>
                                         </Grid>
                                     </CardContent>
                                 </Card>

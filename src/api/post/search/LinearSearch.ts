@@ -20,10 +20,16 @@ export const linearSearch = async (array: Array<number>, searched: number): Prom
             numberOfTransactions += 1;
             if (array[i] == searched) {
                 numberOfTransactions++;
-                return resolve({ index: ++i, numberOfTransactions });
+                let end = performance.now();
+                return resolve({ 
+                    index: ++i, 
+                    numberOfTransactions,
+                    performance: end - start 
+                });
             }
         }
         let end = performance.now();
+       
         numberOfTransactions += 2;     
         return resolve({ 
             index: -1, 

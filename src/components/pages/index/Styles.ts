@@ -94,6 +94,13 @@ export const styles = (theme: Theme) => createStyles({
         display: 'flex',
         alignItems: 'center'
     },
+    resultGrid: {
+        textAlign: 'center',
+        padding: theme.spacing(2)
+    },
+    resultTitle: {
+        margin: theme.spacing(2)
+    },
     form: {
         width: '100%'
     }

@@ -46,23 +46,21 @@ class DataSet extends React.Component<TFormProps> {
                 <Random />
             </Box>
         );
-
-        const searchInput = () => {
-            selectedAlgorithm.endPoint.split('/')[0] == 'search' ?
-                (
-                    <TextField
-                        label="Aranacak Değer"
-                        variant="outlined"
-                        placeholder="16"
-                        name="searched"
-                        onChange={this.searchedOnChange}
-                        defaultValue={searched}
-                        error={searched == ''}
-                        className={classes.searchedInput}
-                        helperText="1- Yalnızca sayı ve '.'(nokta) işaretleri kabul edilir."
-                    />
-                ) : undefined
-        }
+        
+        const searchInput = selectedAlgorithm.endPoint.split('/')[0] == 'search' ?
+            (
+                <TextField
+                    label="Aranacak Değer"
+                    variant="outlined"
+                    placeholder="16"
+                    name="searched"
+                    onChange={this.searchedOnChange}
+                    defaultValue={searched}
+                    error={searched == ''}
+                    className={classes.searchedInput}
+                    helperText="1- Yalnızca sayı ve '.'(nokta) işaretleri kabul edilir."
+                />
+            ) : undefined
 
         const { switchDataset } = this.props;
 
@@ -72,12 +70,12 @@ class DataSet extends React.Component<TFormProps> {
                     switchDataset ?
                         <Grid xs={8} item>
                             {specialInput}
-                            {searchInput()}
+                            {searchInput}
                         </Grid>
                         :
                         <Grid>
                             {randomInput}
-                            {searchInput()}
+                            {searchInput}
                         </Grid>
                 }
             </React.Fragment>
