@@ -18,6 +18,7 @@ import axios from 'axios';
 import InfoIcon from '@material-ui/icons/Info';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import DatasetForm from './form/dataset';
 
 class Index extends React.Component<TIndexProps>{
 
@@ -40,7 +41,7 @@ class Index extends React.Component<TIndexProps>{
             method: 'post',
             url: 'http://localhost:3000/api/' + this.props.selectedAlgorithm.endPoint,
             data: {
-                array,
+                array: this.props.switchDataset ? this.props.specialDataset.TEXT : this.props.randomDataset.TEXT,
                 searched
             }
         })
@@ -59,59 +60,17 @@ class Index extends React.Component<TIndexProps>{
     }
 
     changeSwitchDataset = async () => {
-
-        await this.props.actions.changeSwitchDataset(!this.props.switchDataset)
+        this.props.actions.changeSwitchDataset(!this.props.switchDataset);
     }
 
     render() {
-        const { classes, switchDataset, algorithms, selectedAlgorithm, out } = this.props;
+        const { classes, algorithms, selectedAlgorithm, out } = this.props;
 
         const steps = [
             'Algoritmanızı seçiniz.',
             'Veri seti giriniz/oluşturunuz.',
             'Değerler'
         ];
-
-        const datasetInput = () => {
-            return switchDataset ?
-                <Grid xs={8} item>
-                    <Typography variant="h5" align="center">
-                        Veri setinizi aşağıdaki metin kutusuna giriniz.
-                    </Typography>
-                    <TextField
-                        label="Veri seti"
-                        variant="outlined"
-                        placeholder="1.5, 2, 3.2, 5.6, 7"
-                        name="dataset"
-                        rows={6}
-                        multiline
-                        fullWidth
-                    />
-                </Grid>
-                :
-                <Grid>
-                    <Typography variant="h5" align="center">
-                        Veri setinizin özelliklerini belirleyiniz.
-                    </Typography>
-                    <TextField
-                        label="Üretilecek sayı"
-                        variant="outlined"
-                        className={classes.textField}
-                    />
-                    <TextField
-                        label="Sayı aralığı - Min"
-                        variant="outlined"
-                        className={classes.textField}
-                    />
-                    <TextField
-                        label="Sayı aralığı - Max"
-                        variant="outlined"
-                        className={classes.textField}
-                    />
-                </Grid>
-        }
-
-
 
         const getStepContent = (step: any) => {
 
@@ -198,20 +157,21 @@ class Index extends React.Component<TIndexProps>{
                                                             <CardContent className={classes.cardContent}>
                                                                 <Typography variant="h6">
                                                                     # Bilgilendirme
-                                                            </Typography>
+                                                                </Typography>
                                                                 <Typography>
                                                                     &emsp;Seçtiğiniz algoritma: {selectedAlgorithm.name}
                                                                 </Typography>
-                                                                <Card className={classes.cardDisplayContents}>
-                                                                    <CardContent className={classes.cardContent}>
-                                                                        <Typography variant="subtitle2">
-                                                                            ## Kısaca {selectedAlgorithm.name}
-                                                                        </Typography>
-                                                                        <Typography>
-                                                                            &emsp;{selectedAlgorithm.explain}
-                                                                        </Typography>
-                                                                    </CardContent>
-                                                                </Card>
+
+                                                            </CardContent>
+                                                        </Card>
+                                                        <Card className={classes.cardDisplayContents}>
+                                                            <CardContent className={classes.cardContent}>
+                                                                <Typography variant="h6">
+                                                                    # Kısaca {selectedAlgorithm.name}
+                                                                </Typography>
+                                                                <Typography>
+                                                                    &emsp;{selectedAlgorithm.explain}
+                                                                </Typography>
                                                             </CardContent>
                                                         </Card>
                                                         <Card className={classes.cardDisplayContents}>
@@ -263,7 +223,7 @@ class Index extends React.Component<TIndexProps>{
                                                                 </Typography>
                                                             </Grid>
                                                             <Grid justify="center" container>
-                                                                {datasetInput()}
+                                                                <DatasetForm/>
                                                                 <Grid>
                                                                     <Button
                                                                         color="default"

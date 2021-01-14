@@ -58,8 +58,7 @@ const performanceCountingSort = async (array: Array<number>): Promise<any> => {
                     sortedDataset: array.toString(),
                     performance: result.performance,
                     numberOfTransactions: result.numberOfTransactions,
-                    dataset: starterArray,
-                    algorithmInfo: "",
+                    dataset: starterArray
                 }));
             })
             .catch(err => reject(err));

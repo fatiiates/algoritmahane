@@ -4,10 +4,7 @@ export const styles = (theme: Theme) => createStyles({
     root: {
         textAlign: 'center',       
     },
-    datasetInput: {
-        margin: theme.spacing(2,0,2,0)
-    },
-    searchedInput: {
-        margin: theme.spacing(2,0,2,0)
+    textField: {
+        margin: theme.spacing(2,2,2,0)
     },
 });

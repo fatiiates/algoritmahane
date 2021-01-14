@@ -15,8 +15,9 @@ interface TypeState {
             OUT: object,
             FORMS: {
                 DATASET: {
-                    SPECIAL_DATASET: object,
-                    RANDOM_DATASET: object
+                    SPECIAL_DATASET: string,
+                    RANDOM_DATASET: object,
+                    SEARCHED: string
                 }
             }
         }

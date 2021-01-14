@@ -8,7 +8,9 @@ function mapState(state) {
         selectedAlgorithm: state.pagesIndexSelectedAlgorithmReducers,
         activeStep: state.pagesIndexStepperReducers,
         switchDataset: state.pagesIndexSwitchDataset,
-        out: state.pagesIndexOut
+        out: state.pagesIndexOut,
+        specialDataset: state.pagesIndexFormsDatasetSpecial,
+        randomDataset: state.pagesIndexFormsDatasetRandom,
     }
 }
 

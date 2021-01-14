@@ -7,7 +7,4 @@ export const styles = (theme: Theme) => createStyles({
     datasetInput: {
         margin: theme.spacing(2,0,2,0)
     },
-    searchedInput: {
-        margin: theme.spacing(2,0,2,0)
-    },
 });

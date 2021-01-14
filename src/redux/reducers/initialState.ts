@@ -17,14 +17,13 @@ const initialState: TypeState = {
             OUT: null,
             FORMS: {
                 DATASET: {
-                    SPEACIAL_DATASET: {
-                        ERROR_TEXT: '',
-                        TEXT: ''
-                    },
+                    SPECIAL_DATASET: null,
                     RANDOM_DATASET: {
-                        ERROR_TEXT: '',
-                        TEXT: ''
-                    }
+                        MIN: null,
+                        MAX: null,
+                        PIECE: null
+                    },
+                    SEARCHED: null,
                 }
             }
         }

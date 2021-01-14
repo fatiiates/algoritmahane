@@ -20,10 +20,14 @@ export function changeOut(value) {
     return { type: actionTypes.CHANGE_INDEX_OUT_DATA, payload: value };
 }
 
-export function changeFormsDatasetSpecialDataset(value) {
-    return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_SPECIAL_DATASET, payload: value };
+export function changeFormsDatasetSpecial(value) {
+    return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_SPECIAL, payload: value };
 }
 
-export function changeFormsDatasetRandomDataset(value) {
-    return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_SPECIAL_DATASET, payload: value };
+export function changeFormsDatasetRandom(value) {
+    return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_RANDOM, payload: value };
+}
+
+export function changeFormsDatasetSearched(value) {
+    return { type: actionTypes.CHANGE_INDEX_FORMS_DATASET_SEARCHED, payload: value };
 }

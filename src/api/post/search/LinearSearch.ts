@@ -46,8 +46,7 @@ const performanceLinearSearch = async (array: Array<number>, searched: number): 
                     index: result.index,
                     performance: result.performance,
                     numberOfTransactions: result.numberOfTransactions,
-                    dataset: array.toString(),
-                    algorithmInfo: "",
+                    dataset: array.toString()
                 }));
             })
             .catch(err => reject(err));

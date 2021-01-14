@@ -62,8 +62,7 @@ const performanceBinarySearch = async (array: Array<number>, searched: number): 
                     index: result.index,
                     performance: result.performance,
                     numberOfTransactions: result.numberOfTransactions,
-                    dataset: starterArray,
-                    algorithmInfo: "",
+                    dataset: starterArray
                 }));
             })
             .catch(err => reject(err));

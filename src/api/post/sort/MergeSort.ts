@@ -98,8 +98,7 @@ const performanceMergeSort = async (array: Array<number>): Promise<any> => {
                     sortedDataset: array.toString(),
                     performance: end - start,
                     numberOfTransactions: result.numberOfTransactions,
-                    dataset: starterArray,
-                    algorithmInfo: "",
+                    dataset: starterArray
                 }));
             })
             .catch(err => reject(err));
