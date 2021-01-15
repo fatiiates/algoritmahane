@@ -76,7 +76,14 @@
 
 ## KURULUM
 
-### NodeJS Mevcut Değilse 
+Node.js'i bilgisayarınıza aşağıdaki linkten indirip kurabilirsiniz  
+https://nodejs.org/en/  
 
-Proje NodeJS üzerinde çalışmaktadır. NodeJs kurulu değilse aşağıdaki adres üzerinden indirebilirsiniz;
-> NodeJS: https://nodejs.org/en/
+Node.js kurulduktan sonra reponun klonladığı klasöre komut satırı aracılığıyla girerek   
+(örn: cd algorithm-analysis-and-design) aşağıdaki komutu çalıştırmalısınız.
+
+    npm i --save
+
+Modüller kurulduktan sonra aşağıdaki komut ile başlatabilirsiniz varsayılan olarak localhost:3000 adresinde siteniz hazır halde açılacaktır.
+
+    npm run start
