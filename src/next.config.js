@@ -9,6 +9,6 @@ module.exports = {
         return config;
     },
     env: {
-        basePath: 'https://algoritmahane.herokuapp.com/',
+        basePath: 'http://localhost:3000',
     },
 }
