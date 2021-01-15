@@ -6,19 +6,19 @@
 │   │   ├── post 
 │   │   │   ├── search 
 │   │   │   |   ├── info 
-│   │   │   │   |    ├── Binary.md
-│   │   │   │   |    └── Linear.md
+│   │   │   │   |   ├── Binary.md
+│   │   │   │   |   └── Linear.md
 │   │   │   │   ├── BinarySearch.ts
 │   │   │   │   └── LinearSearch.ts
 │   │   │   ├── sort
 │   │   │   |   ├── info 
-│   │   │   │   |    ├── Bucket.md
-│   │   │   │   |    ├── Counting.md
-│   │   │   │   |    ├── Heap.md
-│   │   │   │   |    ├── Insertion.md
-│   │   │   │   |    ├── Merge.md
-│   │   │   │   |    ├── Quick.md
-│   │   │   │   |    └── Radix.md
+│   │   │   │   |   ├── Bucket.md
+│   │   │   │   |   ├── Counting.md
+│   │   │   │   |   ├── Heap.md
+│   │   │   │   |   ├── Insertion.md
+│   │   │   │   |   ├── Merge.md
+│   │   │   │   |   ├── Quick.md
+│   │   │   │   |   └── Radix.md
 │   │   │   │   ├── BucketSort.ts
 │   │   │   │   ├── CountingSort.ts 
 │   │   │   │   ├── HeapSort.ts 
@@ -38,12 +38,12 @@
 │   │   ├── api
 │   │   │   ├── search 
 │   │   │   |   ├── info 
-│   │   │   │   |    └── [algoritma_adı]
+│   │   │   │   |   └── [algoritma_adı]
 │   │   │   │   ├── binary
 │   │   │   │   └── linear
 │   │   │   ├── sort
 │   │   │   |   ├── info 
-│   │   │   │   |    └── [algoritma_adı]
+│   │   │   │   |   └── [algoritma_adı]
 │   │   │   │   ├── bucket
 │   │   │   │   ├── counting
 │   │   │   │   ├── heap
