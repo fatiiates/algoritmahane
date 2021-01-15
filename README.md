@@ -87,3 +87,12 @@ Node.js kurulduktan sonra reponun klonladığı klasöre komut satırı aracıl�
 Modüller kurulduktan sonra aşağıdaki komut ile başlatabilirsiniz varsayılan olarak localhost:3000 adresinde siteniz hazır halde açılacaktır.
 
     npm run start
+    
+# GÖRÜNTÜLER
+Anasayfa - Light Mode
+![image](https://user-images.githubusercontent.com/51250249/104730102-7a8a1c00-574a-11eb-9824-e6244b9d487a.png)
+Anasayfa - Dark Mode
+![image](https://user-images.githubusercontent.com/51250249/104730177-a0172580-574a-11eb-9019-6ad16742c967.png)
+Bilgi sayfası
+![image](https://user-images.githubusercontent.com/51250249/104730247-bf15b780-574a-11eb-8376-54c4c1fd01d4.png)
+
