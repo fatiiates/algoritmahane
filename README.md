@@ -33,25 +33,33 @@
 │   │   ├── pages (Sayfa içerikleri)
 │   │   └── root (Kendi oluşturduğumuz bileşenler)
 │   ├── constants
-│   │   ├── material (Material-ui varsayılan dosyaları)
-│   │   └── root (Kendi oluşturduğumuz bileşenler)
+│   │   └── types (Değişkenler için tip tanımları)
 │   ├── pages (www.yourdomain.com/ altında açılacak uç noktalar)
 │   │   ├── api
-│   │   │   ├── user [HEADER: (Authorization: Bearer <KULLANICI_JWT_TOKEN>)] -> Dizin altında /login hariç her yerde gereklidir.
-│   │   │   │   ├── file 
-│   │   │   │   │   ├── download [METHOD: POST, BODY: { "data": { "targetFile": string } }]
-│   │   │   │   │   ├── upload [METHOD: POST]
-│   │   │   │   │   ├── uploadedFiles [METHOD: POST]
-│   │   │   │   ├── login [METHOD: POST, BODY: { "data": { "email": string, "password": string} }]
-│   │   │   │   ├── logout [METHOD: POST] 
-│   │   │   │   ├── signup [METHOD: POST, BODY: { "data": { "email": string, "password": string, "user_fullname": string} }] 
+│   │   │   ├── search 
+│   │   │   |   ├── info 
+│   │   │   │   |    └── [algoritma_adı]
+│   │   │   │   ├── binary
+│   │   │   │   └── linear
+│   │   │   ├── sort
+│   │   │   |   ├── info 
+│   │   │   │   |    └── [algoritma_adı]
+│   │   │   │   ├── bucket
+│   │   │   │   ├── counting
+│   │   │   │   ├── heap
+│   │   │   │   ├── insertion
+│   │   │   │   ├── merge
+│   │   │   │   ├── quick
+│   │   │   │   └── radix
+│   │   │   └── index
 │   │   ├── _app.tsx (Next.js sayfa konfigürasyonları)
 │   │   ├── _document.tsx (Next.js sayfalarını çerçeveleyen döküman konfigürasyonları)
+│   │   ├── _providers.tsx (Uygulama kapsayıcıları)
 │   │   ├── ./* (Bulunan her dosya bir uç nokta olarak açılır)
 │   ├── public/static (Web adresinin statik dosyaları)
 |   ├── redux
-│   │   ├── material (Material-ui varsayılan dosyaları)
-│   │   └── root (Kendi oluşturduğumuz bileşenler)
+│   │   ├── actions (Redux actions)
+│   │   └── reducers (Redux reducers)
 │   ├── next-env.d.ts
 │   ├── next.config.js
 │   └── tsconfig.json
