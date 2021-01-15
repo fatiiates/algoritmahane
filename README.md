@@ -28,7 +28,9 @@
 │   │   │   │   └── RadixSort.ts
 │   │   └── index.ts 
 │   ├── components
+│   │   ├── main (Ortak bileşenler)
 │   │   ├── material (Material-ui varsayılan dosyaları)
+│   │   ├── pages (Sayfa içerikleri)
 │   │   └── root (Kendi oluşturduğumuz bileşenler)
 │   ├── constants
 │   │   ├── material (Material-ui varsayılan dosyaları)
