@@ -4,14 +4,14 @@
 ├── src
 │   ├── api 
 │   │   ├── post 
-│   │   │   ├── search 
-│   │   │   |   ├── info 
+│   │   │   ├── search [METHOD: POST, DATA: { array: string, searched: string }]
+│   │   │   |   ├── info # İnfo dizini altında 'data' parametresi gerekmez.
 │   │   │   │   |   ├── Binary.md
 │   │   │   │   |   └── Linear.md
 │   │   │   │   ├── BinarySearch.ts
 │   │   │   │   └── LinearSearch.ts
-│   │   │   ├── sort
-│   │   │   |   ├── info 
+│   │   │   ├── sort [METHOD: POST, DATA: { array: string }] 
+│   │   │   |   ├── info # İnfo dizini altında 'data' parametresi gerekmez.
 │   │   │   │   |   ├── Bucket.md
 │   │   │   │   |   ├── Counting.md
 │   │   │   │   |   ├── Heap.md
