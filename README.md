@@ -1,30 +1,89 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
+# HİYERARŞİK DÜZEN
+  
 ```bash
-npm run dev
-# or
-yarn dev
+├── src
+│   ├── api 
+│   │   ├── post 
+│   │   │   ├── search [METHOD: POST, DATA: { array: string, searched: string }]
+│   │   │   |   ├── info # İnfo dizini altında 'data' parametresi gerekmez.
+│   │   │   │   |   ├── Binary.md
+│   │   │   │   |   └── Linear.md
+│   │   │   │   ├── BinarySearch.ts
+│   │   │   │   └── LinearSearch.ts
+│   │   │   ├── sort [METHOD: POST, DATA: { array: string }] 
+│   │   │   |   ├── info # İnfo dizini altında 'data' parametresi gerekmez.
+│   │   │   │   |   ├── Bucket.md
+│   │   │   │   |   ├── Counting.md
+│   │   │   │   |   ├── Heap.md
+│   │   │   │   |   ├── Insertion.md
+│   │   │   │   |   ├── Merge.md
+│   │   │   │   |   ├── Quick.md
+│   │   │   │   |   └── Radix.md
+│   │   │   │   ├── BucketSort.ts
+│   │   │   │   ├── CountingSort.ts 
+│   │   │   │   ├── HeapSort.ts 
+│   │   │   │   ├── InsertionSort.ts 
+│   │   │   │   ├── MergeSort.ts 
+│   │   │   │   ├── QuickSort.ts
+│   │   │   │   └── RadixSort.ts
+│   │   └── index.ts 
+│   ├── components
+│   │   ├── main (Ortak bileşenler)
+│   │   ├── material (Material-ui varsayılan dosyaları)
+│   │   ├── pages (Sayfa içerikleri)
+│   │   └── root (Kendi oluşturduğumuz bileşenler)
+│   ├── constants
+│   │   └── types (Değişkenler için tip tanımları)
+│   ├── pages (www.yourdomain.com/ altında açılacak uç noktalar)
+│   │   ├── api
+│   │   │   ├── search 
+│   │   │   |   ├── info 
+│   │   │   │   |   └── [algoritma_adı]
+│   │   │   │   ├── binary
+│   │   │   │   └── linear
+│   │   │   ├── sort
+│   │   │   |   ├── info 
+│   │   │   │   |   └── [algoritma_adı]
+│   │   │   │   ├── bucket
+│   │   │   │   ├── counting
+│   │   │   │   ├── heap
+│   │   │   │   ├── insertion
+│   │   │   │   ├── merge
+│   │   │   │   ├── quick
+│   │   │   │   └── radix
+│   │   │   └── index
+│   │   ├── _app.tsx (Next.js sayfa konfigürasyonları)
+│   │   ├── _document.tsx (Next.js sayfalarını çerçeveleyen döküman konfigürasyonları)
+│   │   ├── _providers.tsx (Uygulama kapsayıcıları)
+│   │   ├── ./* (Bulunan her dosya bir uç nokta olarak açılır)
+│   ├── public/static (Web adresinin statik dosyaları)
+|   ├── redux
+│   │   ├── actions (Redux actions)
+│   │   └── reducers (Redux reducers)
+│   ├── next-env.d.ts
+│   ├── next.config.js
+│   └── tsconfig.json
+├── .gitignore
+├── LICENSE
+├── README.md
+├── package-lock.json
+├── package.json
+└── yarn.lock
 ```
+## GEREKSİNİMLER
+- NodeJS ^14.15.0
+- npm ^6.14.8
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## KURULUM
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Node.js'i bilgisayarınıza aşağıdaki linkten indirip kurabilirsiniz  
+https://nodejs.org/en/  
 
-## Learn More
+Node.js kurulduktan sonra reponun klonladığı klasöre komut satırı aracılığıyla girerek   
+(örn: cd algorithm-analysis-and-design) aşağıdaki komutu çalıştırmalısınız.
 
-To learn more about Next.js, take a look at the following resources:
+    npm i --save
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Modüller kurulduktan sonra aşağıdaki komut ile başlatabilirsiniz varsayılan olarak localhost:3000 adresinde siteniz hazır halde açılacaktır.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    npm run start
