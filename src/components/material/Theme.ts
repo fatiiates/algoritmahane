@@ -79,12 +79,12 @@ export const darkTheme: Theme = createMuiTheme({
         type: 'dark',
         primary: {
             light: '#63628B',
-            main: '#3C3B6E',
+            main: '#e91e63',
             dark: '#2A294D',
         },
         secondary: {
             light: '#9F3E72',
-            main: '#880E4F',
+            main: '#4db6ac',
             dark: '#5F0937',
         },
         error: {
@@ -121,7 +121,7 @@ export const darkTheme: Theme = createMuiTheme({
         },
         background: {
             default: '#303030',
-            paper: '#424242',
+            paper: '#303030',
         },
         divider: 'rgba(255, 255, 255, 0.12)',
     },

@@ -16,6 +16,15 @@ export const styles = (theme: Theme) => createStyles({
         display: 'flex',
         ...theme.mixins.toolbar,
     },
+    changeTheme: {
+        padding: '0!important',
+        margin: '0!important',
+        width: '100%',
+        display: 'flex',
+        ...theme.mixins.toolbar,
+        position: 'absolute',
+        right: 0
+    },
     iconLink: {
         minWidth: 'auto',
         width: '100%',

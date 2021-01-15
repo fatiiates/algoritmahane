@@ -23,7 +23,7 @@ Default.getInitialProps = async ({ query }) => {
         await axios({
             method: 'post',
             url: `/api/${query.algorithmType}/info/${query.algorithm}`,
-            baseURL: process.env.dev_baseURL 
+            baseURL: process.env.basePath 
         })
             .then(async function (res) {
                 result = res.data.result;

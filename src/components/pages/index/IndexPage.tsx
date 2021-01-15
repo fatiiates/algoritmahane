@@ -107,7 +107,7 @@ class Index extends React.Component<TIndexProps>{
             method: 'post',
             url: '/api/' + this.props.selectedAlgorithm.endPoint,
             data: data,
-            baseURL: process.env.dev_baseURL 
+            baseURL: process.env.basePath 
         })
             .then(async function (res) {
                 self.props.actions.changeOut(res.data.result);

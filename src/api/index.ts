@@ -36,8 +36,9 @@ const algorithms = {
         },
         {
             constraints: [
-                'Verileriniz rasyonel sayılardan oluşmalıdır.',
-                'Sayılar [-1000000, 1000000] aralığında olmalıdır.'
+                'Verileriniz tam sayılardan oluşmalıdır.',
+                'Sayılar [-1000000, 1000000] aralığında olmalıdır.',
+                'Girilen ondalık sayıların tam kısımları sayılacaktır.'
             ],
             endPoint: "sort/counting",
             explain: 'Genellikle O(n + k) zamanda çalışan bir sıralama algoritmasıdır. \
@@ -97,7 +98,8 @@ const algorithms = {
         {
             constraints: [
                 'Verileriniz rasyonel sayılardan oluşmalıdır.',
-                'Sayılar [-1000000, 1000000] aralığında olmalıdır.'
+                'Sayılar [-1000000, 1000000] aralığında olmalıdır.',
+                'Girilen ondalık sayıların tam kısımları sayılacaktır.'
             ],
             endPoint: "sort/radix",
             explain: 'Genellikle O(n*k) zamanda çalışan bir sıralama algoritmasıdır. \

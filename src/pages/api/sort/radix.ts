@@ -20,7 +20,7 @@ const Main = async (req: NextApiRequest, res: NextApiResponse) => {
             } else {
                 const { array } = req.body;
 
-                const dataArray = array.split(',').map(Number);
+                const dataArray = array.split(',').map(item => parseInt(item, 10));
 
                 let send: TResponse = createSuccessResponse({
                     result: await performanceRadixSort(dataArray)

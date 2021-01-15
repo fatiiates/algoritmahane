@@ -8,7 +8,8 @@ import Hidden from '@material-ui/core/Hidden';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness6SharpIcon from '@material-ui/icons/Brightness6Sharp';
+import BrightnessHighSharpIcon from '@material-ui/icons/BrightnessHighSharp';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -41,11 +42,11 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
 
     handleDrawerToggle = (): void => {
         this.props.actions.changeDrawer(!this.props.openDrawer);
-        console.log(this.props);
     }
 
     handleTheme = () => {
         this.props.actions.changeTheme(!this.props.theme);
+        console.log(this.props.theme);
     }
 
     render() {
@@ -82,30 +83,28 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
                                         </Button>
                                     </Link>
                                 </Grid>
-                                <Grid className={classes.hiddenMenu}>
+                                <Grid className={classes.changeTheme} item xs={2}>
                                     <Button
                                         className={classes.iconLink}
                                         onClick={this.handleTheme}
                                         color="inherit"
                                     >
-                                        <Brightness4Icon />
+                                        {this.props.theme ? <BrightnessHighSharpIcon /> : <Brightness6SharpIcon />}
                                     </Button>
                                 </Grid>
                             </Grid>
                         </Hidden>
-                        {/*<Hidden smDown>
-                            <Button
-                                aria-haspopup="true"
-                                component="a"
-                                href="/hesap"
-                                color="inherit"
-                            >
-                                <Typography className={classes.avatarTitle} noWrap>
-                                    Fatih Ateş
-                                </Typography>
-                                <Avatar alt="Fatih Ateş" src="/static/img/profile.png" />
-                            </Button>
-                        </Hidden>*/}
+                        <Hidden smDown>
+                            <Grid className={classes.changeTheme} item xs={1}>
+                                <Button
+                                    className={classes.iconLink}
+                                    onClick={this.handleTheme}
+                                    color="inherit"
+                                >
+                                    {this.props.theme ? <BrightnessHighSharpIcon /> : <Brightness6SharpIcon />}
+                                </Button>
+                            </Grid>
+                        </Hidden>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>

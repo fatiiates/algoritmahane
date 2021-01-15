@@ -112,7 +112,6 @@ class DefaultStepper extends React.Component<TStepperProps>{
         const navButton = (
             <div>
                 <div>
-                    {backButton}
                     {activeStep != steps.length ? nextButton : undefined}
                 </div>
             </div>

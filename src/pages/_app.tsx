@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Head from 'next/head';
 import App, { AppContext, AppInitialProps } from 'next/app';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,7 +10,7 @@ import * as indexActions from '../redux/actions/pages/indexActions';
 import Provider from './_providers';
 
 class MyApp extends App<AppInitialProps> {
-
+   
     componentDidMount = () => {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
@@ -20,10 +21,11 @@ class MyApp extends App<AppInitialProps> {
 
     public static getInitialProps = async ({ Component, ctx }: AppContext) => {
 
+
         await axios({
             method: 'post',
             url: '/api',
-            baseURL: process.env.dev_baseURL
+            baseURL: process.env.basePath
         })
             .then(async function (res) {
                 await ctx.store.dispatch(indexActions.changeAlgorithms(res.data.result));

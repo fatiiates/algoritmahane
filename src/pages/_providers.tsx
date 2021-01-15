@@ -1,13 +1,17 @@
 import React from 'react';
+import cookies from 'next-cookies'
+import App, { AppContext, AppInitialProps } from 'next/app';
 
 import { connect } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core';
+import * as themeActions from '../redux/actions/root/themeActions';
 import { darkTheme, lightTheme } from '../components/material/Theme';
 
 interface IProvider {
     theme: boolean;
     children?: React.ReactNode;
 }
+
 
 class Provider extends React.Component<IProvider> {
 
