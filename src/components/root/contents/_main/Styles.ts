@@ -13,6 +13,7 @@ export const styles = (theme: Theme) => createStyles({
     content: {
         flexGrow: 1,
         maxWidth: '100%',
+        wordBreak: 'break-word',
     },
     drawerHeader: {
         display: 'flex',

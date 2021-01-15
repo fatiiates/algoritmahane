@@ -12,13 +12,15 @@ import Link from 'next/link';
 import { connector } from './Redux';
 import type { TIndexProps } from './Types';
 import { styles } from './Styles';
-import { Button, Card, CardContent, FormControlLabel, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardContent, FormControlLabel, Grid, Hidden, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import axios from 'axios';
 import InfoIcon from '@material-ui/icons/Info';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
 import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import StorageIcon from '@material-ui/icons/Storage';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import DatasetForm from './form/dataset';
 
@@ -35,13 +37,15 @@ class Index extends React.Component<TIndexProps>{
 
     }
 
+    
+
     handleOut = async () => {
 
         const self = this;
         let data = null;
 
         switch (this.props.switchDataset) {
-            case true: console.log(this.props.specialDataset);
+            case true:
                 if (this.props.specialDataset == null || this.props.specialDataset.length == 0)
                     return 0;
 
@@ -61,7 +65,7 @@ class Index extends React.Component<TIndexProps>{
                 }
 
                 break;
-            case false: console.log(2);
+            case false:
                 if (this.props.randomDataset.MIN == null || this.props.randomDataset.MIN == 0)
                     return 0;
 
@@ -73,13 +77,13 @@ class Index extends React.Component<TIndexProps>{
 
                 const { MIN, MAX, PIECE } = this.props.randomDataset;
 
-                let numbers: Array<number> = Array.from(Array(PIECE).keys()).map(() => Math.floor(Math.random() * (MAX - MIN) + MIN));
+                let numbers = Array.from(Array(parseInt(PIECE)).keys()).map(
+                    () => Math.floor(Math.random() * (parseInt(MAX) - parseInt(MIN) + 1) + parseInt(MIN))).toString();
 
                 if (this.props.selectedAlgorithm.endPoint.split('/')[0] == 'search')
                     if (this.props.searched.length == null || this.props.searched.length == 0)
                         return 0;
                     else {
-
                         data = {
                             array: numbers,
                             searched: this.props.searched
@@ -101,8 +105,9 @@ class Index extends React.Component<TIndexProps>{
 
         await axios({
             method: 'post',
-            url: 'http://localhost:3000/api/' + this.props.selectedAlgorithm.endPoint,
-            data: data
+            url: '/api/' + this.props.selectedAlgorithm.endPoint,
+            data: data,
+            baseURL: process.env.dev_baseURL 
         })
             .then(async function (res) {
                 self.props.actions.changeOut(res.data.result);
@@ -116,6 +121,10 @@ class Index extends React.Component<TIndexProps>{
 
     handleBack = () => {
         this.props.actions.changeStepperActiveStep(this.props.activeStep - 1);
+    }
+
+    handleReset = () => {
+        this.props.actions.changeStepperActiveStep(0);
     }
 
     changeSwitchDataset = async () => {
@@ -146,7 +155,7 @@ class Index extends React.Component<TIndexProps>{
                                                     <Card className={classes.cardDisplayContents}>
                                                         <CardContent className={classes.cardContent}>
                                                             <Typography className={classes.cardTitle} color="textSecondary" gutterBottom>
-                                                                <Search className={classes.icon} />{`${algorithms.search.length} adet arama algoritması bulundu.`}
+                                                                <Search className={classes.icon} />{`${algorithms.search.length} adet arama algoritması bulundu.`}&emsp;
                                                             </Typography>
                                                             {algorithms.search.map((algorithm) => (
                                                                 <Grid
@@ -205,7 +214,7 @@ class Index extends React.Component<TIndexProps>{
                             <Main>
                                 {
                                     selectedAlgorithm ?
-                                        <div>
+                                        <Box>
                                             <Typography variant="h5" align="center">
                                                 Hmm. Bu bir {selectedAlgorithm.endPoint.split('/')[0] == 'search' ? 'arama' : 'sıralama'} algoritması. Güzel seçim!
                                             </Typography>
@@ -283,39 +292,75 @@ class Index extends React.Component<TIndexProps>{
                                                             </Grid>
                                                             <Grid justify="center" container>
                                                                 <DatasetForm />
-                                                                <Grid>
-                                                                    <Button
-                                                                        color="default"
-                                                                        startIcon={<KeyboardBackspaceIcon />}
-                                                                        onClick={this.handleBack}
-                                                                    >
-                                                                        Geri
-                                                                </Button>
-                                                                    <Button
-                                                                        variant="contained"
-                                                                        className={classes.resultButton}
-                                                                        endIcon={<DoneOutlineIcon />}
-                                                                        name="button"
-                                                                        onClick={this.handleOut}
-                                                                    >
-                                                                        Sonuçları gör
-                                                                </Button>
-                                                                    <Link href={`/info/${selectedAlgorithm.endPoint}`}>
+                                                                <Hidden smDown>
+                                                                    <Grid>
+                                                                        <Button
+                                                                            color="default"
+                                                                            startIcon={<KeyboardBackspaceIcon />}
+                                                                            onClick={this.handleBack}
+                                                                        >
+                                                                            Geri
+                                                                        </Button>
                                                                         <Button
                                                                             variant="contained"
-                                                                            className={classes.infoButton}
-                                                                            endIcon={<InfoIcon />}
+                                                                            className={classes.resultButton}
+                                                                            endIcon={<DoneOutlineIcon />}
+                                                                            name="button"
+                                                                            onClick={this.handleOut}
                                                                         >
-                                                                            Daha fazla bilgi
-                                                                    </Button>
-                                                                    </Link>
-                                                                </Grid>
+                                                                            Sonuçları gör
+                                                                        </Button>
+                                                                        <Link href={`/info/${selectedAlgorithm.endPoint}`}>
+                                                                            <Button
+                                                                                variant="contained"
+                                                                                className={classes.infoButton}
+                                                                                endIcon={<InfoIcon />}
+                                                                            >
+                                                                                Daha fazla bilgi
+                                                                            </Button>
+                                                                        </Link>
+                                                                    </Grid>
+                                                                </Hidden>
+                                                                <Hidden mdUp>
+                                                                    <Grid justify="center" container>
+                                                                        <Button
+                                                                            variant="contained"
+                                                                            className={classes.resultButton}
+                                                                            endIcon={<DoneOutlineIcon />}
+                                                                            name="button"
+                                                                            onClick={this.handleOut}
+                                                                        >
+                                                                            Sonuçları gör
+                                                                        </Button>
+                                                                    </Grid>
+                                                                    <Grid justify="center" container>
+                                                                        <Link href={`/info/${selectedAlgorithm.endPoint}`}>
+                                                                            <Button
+                                                                                variant="contained"
+                                                                                className={classes.infoButton}
+                                                                                endIcon={<InfoIcon />}
+                                                                            >
+                                                                                Daha fazla bilgi
+                                                                            </Button>
+                                                                        </Link>
+                                                                    </Grid>
+                                                                    <Grid justify="center" container>
+                                                                        <Button
+                                                                            color="default"
+                                                                            startIcon={<KeyboardBackspaceIcon />}
+                                                                            onClick={this.handleBack}
+                                                                            className={classes.backButton}
+                                                                        >
+                                                                            Geri
+                                                                        </Button>
+                                                                    </Grid>
+                                                                </Hidden>
                                                             </Grid>
                                                         </Grid>
                                                     </Grid>
                                                 </Card>
                                             </Grid>
-                                        </div>
+                                        </Box>
                                         :
                                         <Grid justify="center" container>
                                             Seçili bir algoritma bulunamadı. Lütfen geri gidin ve bir algoritma seçin.
@@ -338,7 +383,7 @@ class Index extends React.Component<TIndexProps>{
                                 <Card className={classes.cardRoot}>
                                     <CardContent>
                                         <Grid className={classes.resultGrid} justify="center" container>
-                                            <Typography className={classes.resultTitle} variant="h3" align="center">
+                                            <Typography className={classes.resultTitle} variant="h4" align="center">
                                                 Başarılı! Değerler elimize ulaştı.
                                             </Typography>
                                             <TableContainer component={Paper}>
@@ -349,7 +394,7 @@ class Index extends React.Component<TIndexProps>{
                                                             <TableCell align="center"><strong>Değerler</strong></TableCell>
                                                         </TableRow>
                                                     </TableHead>
-                                                    <TableBody>                                         
+                                                    <TableBody>
                                                         {performance && <TableRow >
                                                             <TableCell><UpdateRoundedIcon /> Performans</TableCell>
                                                             <TableCell align="center">{`${(performance * 1000).toFixed(3)} milisaniye içerisinde gerçekleştirildi.`}</TableCell>
@@ -359,25 +404,73 @@ class Index extends React.Component<TIndexProps>{
                                                             <TableCell align="center">Tam olarak {numberOfTransactions} işlem gerçekleştirildi.</TableCell>
                                                         </TableRow>}
                                                         {index && <TableRow >
-                                                            <TableCell><UpdateRoundedIcon /> Arama Sonucu</TableCell>
-                                                            <TableCell align="center">Aradığınız eleman {index}. indekste bulunuyor</TableCell>
+                                                            <TableCell><FindInPageIcon /> Arama Sonucu</TableCell>
+                                                            <TableCell align="center">
+                                                                {index != -1 ?
+                                                                    `Aradığınız eleman ${index}. indekste bulunuyor`
+                                                                    :
+                                                                    "Aradığınız eleman veri setinde bulunmuyor."
+                                                                }
+                                                            </TableCell>
                                                         </TableRow>}
                                                         {sortedDataset && <TableRow >
-                                                            <TableCell><UpdateRoundedIcon /> Sıralanmış Veri Seti</TableCell>
+                                                            <TableCell><SortIcon /> Sıralanmış Veri Seti</TableCell>
                                                             <TableCell align="center">{sortedDataset}</TableCell>
                                                         </TableRow>}
                                                         {dataset && <TableRow >
-                                                            <TableCell><UpdateRoundedIcon /> Girilen veri seti</TableCell>
+                                                            <TableCell><StorageIcon /> Kullanılan veri seti</TableCell>
                                                             <TableCell align="center">{dataset}</TableCell>
                                                         </TableRow>}
                                                     </TableBody>
                                                 </Table>
                                             </TableContainer>
                                         </Grid>
+                                        <Hidden smDown>
+                                            <Grid>
+                                                <Button
+                                                    color="default"
+                                                    startIcon={<KeyboardBackspaceIcon />}
+                                                    onClick={this.handleBack}
+                                                >
+                                                    Geri
+                                                </Button>
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    name="button"
+                                                    onClick={this.handleReset}
+                                                >
+                                                    Sıfırla
+                                                </Button>
+                                            </Grid>
+                                        </Hidden>
+                                        <Hidden mdUp>
+
+                                            <Grid justify="center" container>
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    name="button"
+                                                    onClick={this.handleReset}
+                                                >
+                                                    Sıfırla
+                                                </Button>
+                                            </Grid>
+                                            <Grid justify="center" container>
+                                                <Button
+                                                    color="default"
+                                                    startIcon={<KeyboardBackspaceIcon />}
+                                                    className={classes.backButton}
+                                                    onClick={this.handleBack}
+                                                >
+                                                    Geri
+                                                </Button>
+                                            </Grid>
+                                        </Hidden>
                                     </CardContent>
                                 </Card>
                             </Grid>
-                        </Main>
+                        </Main >
                     );
                 default:
                     return 'Adım bulunamadı.';
@@ -389,7 +482,7 @@ class Index extends React.Component<TIndexProps>{
                 {
                     algorithms &&
                     <Main>
-                        <Typography variant="h2">
+                        <Typography align="center" variant="h2">
                             Haydi, başlayalım!
                         </Typography>
                         <Stepper

@@ -5,7 +5,7 @@ export class QuickSort {
     numberOfTransactions: number;
     constructor(array: Array<number>) {
         this.numberOfTransactions = 1;
-        this.quickSort(array, 0, array.length);
+        this.quickSort(array, 0, array.length - 1);
     }
 
     public getNumberOfTransactions(){
@@ -20,8 +20,8 @@ export class QuickSort {
             this.quickSort(array, pivot, q);
             this.quickSort(array, q + 1, right);
         }
-    }
-
+    }       
+ 
     private partition(array: Array<any>, pivot: number, q: number) {
         this.numberOfTransactions += 2;
 
@@ -29,7 +29,7 @@ export class QuickSort {
         var i = pivot;
 
         this.numberOfTransactions += q - pivot;
-        for (let j = pivot + 1; j < q; j++) {
+        for (let j = pivot; j <= q; j++) {
             this.numberOfTransactions++;
             if (array[j] < x) {
                 this.numberOfTransactions++;
@@ -41,6 +41,7 @@ export class QuickSort {
         this.exchange(array, pivot, i);
         return i;
     }
+
     private exchange(array: Array<any>, x: number, y: number) {
         this.numberOfTransactions += 3;
 
@@ -62,13 +63,13 @@ export const createQuickSort = async (array: Array<number>): Promise<any> => {
 
         let start = performance.now();
 
-        const testHeapSort = new QuickSort(array);
+        const testQuickSort = new QuickSort(array);
 
         let end = performance.now();
         numberOfTransactions += 2;     
         return resolve({ 
             array,
-            numberOfTransactions:testHeapSort.getNumberOfTransactions(),
+            numberOfTransactions:testQuickSort.getNumberOfTransactions(),
             performance: end - start
         });
     });

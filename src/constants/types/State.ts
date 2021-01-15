@@ -2,7 +2,8 @@ interface TypeState {
     ROOT: {
         DRAWER: {
             OPEN: boolean
-        }
+        },
+        THEME: boolean
     },
     PAGES: {
         INDEX: {

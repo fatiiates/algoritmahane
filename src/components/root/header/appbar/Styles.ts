@@ -13,7 +13,6 @@ export const styles = (theme: Theme) => createStyles({
         padding: '0!important',
         margin: '0!important',
         width: '100%',
-        justifyContent: 'center',
         display: 'flex',
         ...theme.mixins.toolbar,
     },

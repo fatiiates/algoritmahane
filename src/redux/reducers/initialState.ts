@@ -4,7 +4,8 @@ const initialState: TypeState = {
     ROOT: {
         DRAWER: {
             OPEN: false,
-        }
+        },
+        THEME: false,
     },
     PAGES: {
         INDEX: {

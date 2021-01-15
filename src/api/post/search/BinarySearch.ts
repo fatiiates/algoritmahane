@@ -14,12 +14,11 @@ export const binarySearch = async (array: Array<number>, searched: number): Prom
         let numberOfTransactions = 1;
         let start = performance.now();
         array.sort(function (a, b) {
-            numberOfTransactions++;
             return a - b;
         });
-
+        
         numberOfTransactions++;
-        let alt: number = 1,
+        let alt: number = 0,
             orta: number = 0,
             ust: number = array.length;
 
@@ -28,10 +27,13 @@ export const binarySearch = async (array: Array<number>, searched: number): Prom
             orta = Math.floor((alt + ust) / 2);
             numberOfTransactions += 3;
             if (array[orta] == searched) {
+                
+                let end = performance.now();
                 numberOfTransactions -= 1;
                 return resolve({
-                    index: orta,
-                    numberOfTransactions
+                    index: orta+1,
+                    numberOfTransactions,
+                    performance: end - start
                 });
             }
             else if (searched < array[orta])
@@ -55,14 +57,13 @@ export const binarySearch = async (array: Array<number>, searched: number): Prom
 const performanceBinarySearch = async (array: Array<number>, searched: number): Promise<any> => {
 
     return new Promise(async function (resolve, reject) {
-        let starterArray = array.toString();
         await binarySearch(array, searched)
             .then(result => {
                 resolve(createSearchPerformance({
                     index: result.index,
                     performance: result.performance,
                     numberOfTransactions: result.numberOfTransactions,
-                    dataset: starterArray
+                    dataset: array.toString()
                 }));
             })
             .catch(err => reject(err));

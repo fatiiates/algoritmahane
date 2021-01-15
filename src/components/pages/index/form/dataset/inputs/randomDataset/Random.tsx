@@ -39,7 +39,7 @@ class Random extends React.Component<TRandomProps>{
     render() {
         const { classes } = this.props;
         const { MAX, MIN, PIECE } = this.props.randomDataset;
-        console.log( MAX, MIN, PIECE);
+        
         return (
             <React.Fragment >
                 <Typography variant="h5" align="center">

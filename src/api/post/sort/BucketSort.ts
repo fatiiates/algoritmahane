@@ -79,9 +79,8 @@ export const bucketSort = async (array: Array<number>): Promise<any> => {
 }
 
 const performanceBucketSort = async (array: Array<number>): Promise<any> => {
-
+    let starterArray = array.toString();
     return new Promise(async function (resolve, reject) {
-        let starterArray = array.toString();
         await bucketSort(array)
             .then(result => {
                 resolve(createSortPerformance({

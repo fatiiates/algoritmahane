@@ -1,15 +1,21 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../components/material/Theme';
+import { lightTheme } from '../components/material/Theme';
 
 export default class MyDocument extends Document {
+
+    constructor(props){
+        super(props);
+    }
+
     render() {
+
         return (
             <Html lang="tr">
                 <Head>
                     {/* PWA primary color */}
-                    <meta name="theme-color" content={theme.palette.primary.main} />
+                    <meta name="theme-color" content={lightTheme.palette.primary.main} />
 
                     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
                     <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
@@ -58,8 +64,6 @@ MyDocument.getInitialProps = async (ctx) => {
         });
 
     const initialProps = await Document.getInitialProps(ctx);
-
-    
 
     return {
         ...initialProps,

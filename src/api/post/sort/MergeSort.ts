@@ -14,8 +14,8 @@ export const mergeSortController = async (array: Array<number>, left: number, ri
             return reject(new Error("Sıralama yapılabilmesi için sağdan sonlandırıcı indeks bulunamadı."));
 
         let start = performance.now();
-
-        const numberOfTransactions = resolve(mergeSort(array, left, right));
+        
+        const numberOfTransactions = mergeSort(array, left, right);
 
         let end = performance.now();
 
@@ -30,10 +30,11 @@ export const mergeSortController = async (array: Array<number>, left: number, ri
 
 export const mergeSort = (array: Array<number>, left: number, right: number) => {
     let numberOfTransactions = 1;
-
+    
     if (left < right) {
+        
         numberOfTransactions += 4;
-        const pivot: number = Math.floor((left + right) / 2);
+        const pivot: number = Math.floor((left + right - 1) / 2);
         numberOfTransactions += mergeSort(array, left, pivot);
         numberOfTransactions += mergeSort(array, pivot + 1, right);
         numberOfTransactions += merge(array, left, pivot, right);
@@ -53,33 +54,48 @@ export const merge = (A: Array<number>, left: number, pivot: number, right: numb
     numberOfTransactions += n1 + 1;
     for (let i = 0; i < n1; i++) {
         numberOfTransactions += 1;
-        L[i] = A[left + i - 1];
+        L[i] = A[left + i];
     }
-    numberOfTransactions += n1 + 1;
-    for (let j = 0; j < n1; j++){
+    numberOfTransactions += n2 + 1;
+    for (let j = 0; j < n2; j++){
         numberOfTransactions += 1;
-        R[j] = A[pivot + j];
+        R[j] = A[pivot + j + 1];
     }
 
     numberOfTransactions += 4;
-    L[n1] = Number.MAX_SAFE_INTEGER;
-    R[n2] = Number.MAX_SAFE_INTEGER;
-    let i: number = 1;
-    let j: number = 1;
-
-    numberOfTransactions += right - left;
-    for (let k = left; k < right; k++) {
-        numberOfTransactions += 2;
+    let i: number = 0;
+    let j: number = 0;
+    let k: number = left;
+    
+    numberOfTransactions += 1;
+    while (i < n1 && j < n2) {
+        numberOfTransactions += 4;
         if (L[i] <= R[j]) {
-            numberOfTransactions++;
+            numberOfTransactions += 1;
             A[k] = L[i];
             i++;
         }
         else {
             numberOfTransactions += 2;
-            A[k] = L[j];
+            A[k] = R[j];
             j++;
         }
+        k++;
+    }
+
+    numberOfTransactions += 1;
+    while (i < n1) {
+        numberOfTransactions += 4;
+        A[k] = L[i];
+        i++;
+        k++;
+    }
+    numberOfTransactions += 1;
+    while (j < n2) {
+        numberOfTransactions += 4;
+        A[k] = R[j];
+        j++;
+        k++;
     }
 
     return numberOfTransactions;
@@ -91,9 +107,11 @@ const performanceMergeSort = async (array: Array<number>): Promise<any> => {
     return new Promise(async function (resolve, reject) {
         let start: number = performance.now();
         let starterArray = array.toString();
-        await mergeSortController(array, 0, array.length)
+        
+        await mergeSortController(array, 0, array.length - 1)
             .then(result => {
                 let end = performance.now();
+                
                 resolve(createSortPerformance({
                     sortedDataset: array.toString(),
                     performance: end - start,

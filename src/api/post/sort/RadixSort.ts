@@ -3,9 +3,9 @@ import { createSortPerformance } from '../../../constants/types/generators/Perfo
 
 const countingSort = (array: Array<number>, k: number) => {
     let numberOfTransactions = 1;
-
-    numberOfTransactions += k + 1;
-    let counting = Array.from(Array(k + 1).keys()).map(() => 0);
+    console.log(array);
+    numberOfTransactions += 11;
+    let counting = Array.from(Array(10).keys()).map(() => 0);
 
     numberOfTransactions += array.length;
     let output = Array.from(Array(array.length).keys()).map(() => 0);
@@ -13,11 +13,11 @@ const countingSort = (array: Array<number>, k: number) => {
     numberOfTransactions += array.length + 1;
     for (let j = 0; j < array.length; j++) {
         numberOfTransactions++;
-        counting[array[j]] = counting[array[j]] + 1;
+        counting[Math.floor(array[j] / k ) % 10]++;
     }
 
     numberOfTransactions += array.length + 1;
-    for (let i = 1; i <= k; i++) {
+    for (let i = 1; i < 10; i++) {
         numberOfTransactions++;
         counting[i] = counting[i] + counting[i - 1];
     }
@@ -25,8 +25,14 @@ const countingSort = (array: Array<number>, k: number) => {
     numberOfTransactions += array.length + 1;
     for (let j = array.length - 1; j >= 0; j--) {
         numberOfTransactions += 2;
-        output[counting[array[j]] - 1] = array[j];
-        counting[array[j]] = counting[array[j]] - 1;
+        output[counting[Math.floor(array[j] / k ) % 10] - 1] = array[j];
+        counting[Math.floor(array[j] / k ) % 10]--;
+    }
+
+    //console.log(output);
+    for (let j = 0; j < array.length; j++) {
+        numberOfTransactions += 1;
+        array[j] = output[j];
     }
 
     return numberOfTransactions;

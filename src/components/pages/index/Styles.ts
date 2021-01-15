@@ -101,6 +101,9 @@ export const styles = (theme: Theme) => createStyles({
     resultTitle: {
         margin: theme.spacing(2)
     },
+    backButton: {
+        margin: theme.spacing(2)
+    },
     form: {
         width: '100%'
     }

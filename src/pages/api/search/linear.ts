@@ -28,10 +28,10 @@ const Main = async (req: NextApiRequest, res: NextApiResponse) => {
             } else {
                 const { array, searched } = req.body;
 
-                const dataArray = array.split(',');
+                const dataArray = array.split(',').map(Number);
 
                 let send: TResponse = createSuccessResponse({
-                    result: await performanceLinearSearch(dataArray, searched)
+                    result: await performanceLinearSearch(dataArray, Number(searched))
                 });
 
                 return res.status(200).json(send);

@@ -68,7 +68,7 @@ class DataSet extends React.Component<TFormProps> {
             <React.Fragment>
                 {
                     switchDataset ?
-                        <Grid xs={8} item>
+                        <Grid xs={12} md={8} item>
                             {specialInput}
                             {searchInput}
                         </Grid>

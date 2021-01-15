@@ -4,22 +4,16 @@ import { withRouter } from 'next/router';
 
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Avatar from '@material-ui/core/Avatar';
-import Badge from '@material-ui/core/Badge';
 import Hidden from '@material-ui/core/Hidden';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import Typography from '@material-ui/core/Typography';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
-
+import Link from 'next/link';
 import { connector } from './Redux';
 import { THeaderAppBarProps, IHideOnScrollProps } from './Types';
 import { styles } from './Styles';
@@ -49,7 +43,11 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
         this.props.actions.changeDrawer(!this.props.openDrawer);
         console.log(this.props);
     }
-    
+
+    handleTheme = () => {
+        this.props.actions.changeTheme(!this.props.theme);
+    }
+
     render() {
 
         const { classes, window, router } = this.props;
@@ -65,7 +63,7 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
                     <Toolbar className={classes.toolbar}>
                         <Hidden mdUp>
                             <Grid className={classes.hiddenMenu} container spacing={3}>
-                                <Grid className={classes.hiddenMenu} item xs>
+                                <Grid className={classes.hiddenMenu} item xs={2}>
                                     <Button
                                         className={classes.iconLink}
                                         onClick={this.handleDrawerToggle}
@@ -74,58 +72,23 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
                                         <MenuIcon />
                                     </Button>
                                 </Grid>
-                                <Grid classes={{ root: classes.hiddenMenu, item: pathname[2] == undefined ? classes.activeMenu : undefined, }} item xs>
-                                    <Button
-                                        className={classes.iconLink}
-                                        component="a"
-                                        href="/"
-                                        color="inherit"
-                                    >
-                                        <HomeIcon />
-                                    </Button>
+                                <Grid classes={{ root: classes.hiddenMenu, item: pathname[2] == undefined ? classes.activeMenu : undefined, }} xs={2} item>
+                                    <Link href="/">
+                                        <Button
+                                            className={classes.iconLink}
+                                            color="inherit"
+                                        >
+                                            <HomeIcon />
+                                        </Button>
+                                    </Link>
                                 </Grid>
-                                <Grid classes={{ root: classes.hiddenMenu, item: pathname[1] == 'ara' ? classes.activeMenu : undefined, }} item xs>
+                                <Grid className={classes.hiddenMenu}>
                                     <Button
                                         className={classes.iconLink}
-                                        component="a"
-                                        href="/ara"
+                                        onClick={this.handleTheme}
                                         color="inherit"
                                     >
-                                        <SearchIcon />
-                                    </Button>
-                                </Grid>
-                                <Grid classes={{ root: classes.hiddenMenu, item: pathname[1] == 'mesajlar' ? classes.activeMenu : undefined, }} item xs>
-                                    <Button
-                                        className={classes.iconLink}
-                                        component="a"
-                                        href="/mesajlar"
-                                        color="inherit"
-                                    >
-                                        <Badge badgeContent={11} color="error">
-                                            <QuestionAnswerIcon />
-                                        </Badge>
-                                    </Button>
-                                </Grid>
-                                <Grid classes={{ root: classes.hiddenMenu, item: pathname[1] == 'bildirimler' ? classes.activeMenu : undefined, }} item xs>
-                                    <Button
-                                        className={classes.iconLink}
-                                        component="a"
-                                        href="/bildirimler"
-                                        color="inherit"
-                                    >
-                                        <Badge badgeContent={11} color="error">
-                                            <NotificationsIcon />
-                                        </Badge>
-                                    </Button>
-                                </Grid>
-                                <Grid classes={{ root: classes.hiddenMenu, item: pathname[1] == 'ayarlar' ? classes.activeMenu : undefined, }} item xs>
-                                    <Button
-                                        className={classes.iconLink}
-                                        component="a"
-                                        href="/hesap"
-                                        color="inherit"
-                                    >
-                                        <AccountCircleIcon />
+                                        <Brightness4Icon />
                                     </Button>
                                 </Grid>
                             </Grid>

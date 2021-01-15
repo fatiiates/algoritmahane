@@ -63,7 +63,7 @@ class MyDrawer extends React.Component<TDrawerProps, IDrawerState>{
                 }
                 <div className={classes.toolbar}>
                     <Typography variant="h6" noWrap>
-                        coupleS
+                        ALGORİTMAHANE
                     </Typography>
                 </div>
                 <Divider/>

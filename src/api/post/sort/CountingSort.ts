@@ -15,6 +15,7 @@ export const countingSort = async (array: Array<number>, k: number): Promise<any
 
         numberOfTransactions += k + 1;
         let counting = Array.from(Array(k + 1).keys()).map(() => 0);
+        console.log(counting);
 
         numberOfTransactions += array.length;
         let output = Array.from(Array(array.length).keys()).map(() => 0);
@@ -30,7 +31,7 @@ export const countingSort = async (array: Array<number>, k: number): Promise<any
             numberOfTransactions++;
             counting[i] = counting[i] + counting[i - 1];
         }
-
+        
         numberOfTransactions += array.length + 1;
         for (let j = array.length - 1; j >= 0; j--) {
             numberOfTransactions += 2;
@@ -40,7 +41,7 @@ export const countingSort = async (array: Array<number>, k: number): Promise<any
 
         let end = performance.now();
         return resolve({
-            array,
+            array: output.toString(),
             numberOfTransactions,
             performance: end - start
         });
@@ -55,7 +56,7 @@ const performanceCountingSort = async (array: Array<number>): Promise<any> => {
         await countingSort(array, Math.max(...array))
             .then(result => {
                 resolve(createSortPerformance({
-                    sortedDataset: array.toString(),
+                    sortedDataset: result.array,
                     performance: result.performance,
                     numberOfTransactions: result.numberOfTransactions,
                     dataset: starterArray

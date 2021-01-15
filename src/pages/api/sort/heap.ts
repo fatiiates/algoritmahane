@@ -20,7 +20,7 @@ const Main = async (req: NextApiRequest, res: NextApiResponse) => {
             } else {
                 const { array } = req.body;
 
-                const dataArray = array.split(',');
+                const dataArray = array.split(',').map(Number);
 
                 let send: TResponse = createSuccessResponse({
                     result: await performanceHeapSort(dataArray)
