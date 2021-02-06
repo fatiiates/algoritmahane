@@ -10,6 +10,5 @@ module.exports = {
     },
     env: {
         basePath: 'http://localhost:3000',
-    },
-    target: "serverless"
+    }
 }
