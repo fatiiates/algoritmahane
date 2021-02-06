@@ -17,6 +17,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import SortIcon from '@material-ui/icons/Sort';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Collapse from '@material-ui/core/Collapse';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 import { connector } from './Redux';
 import { TDrawerProps, IDrawerState } from './Types';
@@ -62,11 +63,13 @@ class MyDrawer extends React.Component<TDrawerProps, IDrawerState>{
                     </div>
                 }
                 <div className={classes.toolbar}>
-                    <Typography variant="h6" noWrap>
-                        ALGORİTMAHANE
-                    </Typography>
+                    <Link href="/">
+                        <ButtonBase component={Typography} variant="h6" className={classes.drawerTitle}>
+                            ALGORİTMAHANE
+                        </ButtonBase>
+                    </Link>
                 </div>
-                <Divider/>
+                <Divider />
                 <List>
                     <ListItem button data-drop="1" onClick={this.handleDrawerDropDown}>
                         <ListItemIcon>

@@ -18,6 +18,7 @@ import Link from 'next/link';
 import { connector } from './Redux';
 import { THeaderAppBarProps, IHideOnScrollProps } from './Types';
 import { styles } from './Styles';
+import { withCookies } from 'react-cookie';
 
 
 function HideOnScroll(props: IHideOnScrollProps) {
@@ -45,8 +46,23 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
     }
 
     handleTheme = () => {
-        this.props.actions.changeTheme(!this.props.theme);
-        console.log(this.props.theme);
+        const { cookies, theme } = this.props;
+        const date = new Date();
+        date.setMonth(date.getMonth() + 3)
+        switch (!theme) {
+            case true:
+                cookies.set('theme', "dark", {
+                    expires: date
+                });
+                break;
+
+            default:
+                cookies.set('theme', "light", {
+                    expires: date
+                });
+                break;
+        }
+        this.props.actions.changeTheme(!theme);
     }
 
     render() {
@@ -112,4 +128,4 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
     }
 }
 
-export default connector(withStyles(styles)(withRouter(HeaderAppBar)));
+export default connector(withStyles(styles)(withRouter(withCookies(HeaderAppBar))));

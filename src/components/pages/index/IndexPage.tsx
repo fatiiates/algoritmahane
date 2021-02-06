@@ -37,7 +37,7 @@ class Index extends React.Component<TIndexProps>{
 
     }
 
-    
+
 
     handleOut = async () => {
 
@@ -66,15 +66,16 @@ class Index extends React.Component<TIndexProps>{
 
                 break;
             case false:
-                if (this.props.randomDataset.MIN == null || this.props.randomDataset.MIN == 0)
+
+                if (this.props.randomDataset.MIN == null)
                     return 0;
 
-                if (this.props.randomDataset.MAX == null || this.props.randomDataset.MAX == 0)
+                if (this.props.randomDataset.MAX == null)
                     return 0;
 
                 if (this.props.randomDataset.PIECE == null || this.props.randomDataset.PIECE == 0)
                     return 0;
-
+                console.log(data)
                 const { MIN, MAX, PIECE } = this.props.randomDataset;
 
                 let numbers = Array.from(Array(parseInt(PIECE)).keys()).map(
@@ -107,7 +108,7 @@ class Index extends React.Component<TIndexProps>{
             method: 'post',
             url: '/api/' + this.props.selectedAlgorithm.endPoint,
             data: data,
-            baseURL: process.env.basePath 
+            baseURL: process.env.basePath
         })
             .then(async function (res) {
                 self.props.actions.changeOut(res.data.result);

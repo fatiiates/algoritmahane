@@ -16,6 +16,11 @@ export const styles = (theme: Theme) => createStyles({
     drawerPaper: {
         width: drawerWidth,
     },
+    drawerTitle: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 0
+    },
     drawerHeader: {
         display: 'flex',
         alignItems: 'center',

@@ -6,7 +6,6 @@ import { TextField, Typography } from '@material-ui/core';
 import { connector } from './Redux';
 import { TRandomProps } from './Types';
 import { styles } from './Styles';
-import { parse } from 'ts-node';
 
 class Random extends React.Component<TRandomProps>{
     minRef: any;
@@ -28,7 +27,8 @@ class Random extends React.Component<TRandomProps>{
         else if (!re.exec(event.target.value))
             this.props.actions.changeRandomDataSet('', key);
         else
-            this.props.actions.changeRandomDataSet( event.target.value, key);
+            this.props.actions.changeRandomDataSet(event.target.value, key);
+
     }
 
     componentWillUnmount = async () => {
@@ -39,7 +39,7 @@ class Random extends React.Component<TRandomProps>{
     render() {
         const { classes } = this.props;
         const { MAX, MIN, PIECE } = this.props.randomDataset;
-        
+
         return (
             <React.Fragment >
                 <Typography variant="h5" align="center">
@@ -67,7 +67,7 @@ class Random extends React.Component<TRandomProps>{
                     className={classes.textField}
                     error={(PIECE != null && PIECE < 2) || PIECE == ''}
                     onChange={e => this.randomDatasetOnChange(e, 'PIECE')}
-                />         
+                />
             </React.Fragment>
         );
     };

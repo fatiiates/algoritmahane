@@ -1,16 +1,18 @@
 import React from 'react';
 
 import Head from 'next/head';
-import App, { AppContext, AppInitialProps } from 'next/app';
+import App, { AppContext } from 'next/app';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import wrapper from '../redux/reducers/wrapper';
 import axios from 'axios';
 import * as indexActions from '../redux/actions/pages/indexActions';
+import { CookiesProvider } from 'react-cookie';
 import Provider from './_providers';
 
-class MyApp extends App<AppInitialProps> {
-   
+
+class MyApp extends App {
+
     componentDidMount = () => {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
@@ -50,16 +52,18 @@ class MyApp extends App<AppInitialProps> {
 
         return (
             <React.Fragment>
-                <Head>
-                    <title>Algoritma Tasarımı ve Analizi</title>
-                    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-                    <meta name="author" content="Fatih ATEŞ" />
-                </Head>
-                <Provider>
-                    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                    <CssBaseline />
-                    <Component {...pageProps} />
-                </Provider>
+                <CookiesProvider>
+                    <Head>
+                        <title>Algoritma Tasarımı ve Analizi</title>
+                        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+                        <meta name="author" content="Fatih ATEŞ" />
+                    </Head>
+                    <Provider>
+                        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                        <CssBaseline />
+                        <Component {...pageProps} />
+                    </Provider>
+                </CookiesProvider>
             </React.Fragment>
         );
     }
