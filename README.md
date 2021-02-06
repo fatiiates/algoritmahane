@@ -83,7 +83,28 @@ Node.js kurulduktan sonra reponun klonladığı klasöre komut satırı aracıl�
 (örn: cd algorithm-analysis-and-design) aşağıdaki komutu çalıştırmalısınız.
 
     npm i --save
+    
+Kodları derlemek için;
+
+    npm run build
 
 Modüller kurulduktan sonra aşağıdaki komut ile başlatabilirsiniz varsayılan olarak localhost:3000 adresinde siteniz hazır halde açılacaktır.
 
     npm run start
+    
+# GÖRÜNTÜLER
+Anasayfa - Light Mode
+![image](https://user-images.githubusercontent.com/51250249/104730102-7a8a1c00-574a-11eb-9824-e6244b9d487a.png)
+Anasayfa - Dark Mode
+![image](https://user-images.githubusercontent.com/51250249/104730177-a0172580-574a-11eb-9019-6ad16742c967.png)
+Anasayfa - Veri Girişi - Light Mode
+![image](https://user-images.githubusercontent.com/51250249/104731818-511ebf80-574d-11eb-88e6-601c8a9bda2f.png)
+Anasayfa - Veri Girişi - Dark Mode
+![image](https://user-images.githubusercontent.com/51250249/104731925-76abc900-574d-11eb-83c8-0810ccbb7288.png)
+Anasayfa - Sonuçlar - Light Mode
+![image](https://user-images.githubusercontent.com/51250249/104732059-b2469300-574d-11eb-92f0-272f54cb8470.png)
+Anasayfa - Sonuçlar - Dark Mode
+![image](https://user-images.githubusercontent.com/51250249/104731990-90e5a700-574d-11eb-9a74-8423676fe622.png)
+Bilgi sayfası - Dark Mode
+![image](https://user-images.githubusercontent.com/51250249/104730247-bf15b780-574a-11eb-8376-54c4c1fd01d4.png)
+
