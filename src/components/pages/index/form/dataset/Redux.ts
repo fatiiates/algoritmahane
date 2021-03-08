@@ -10,6 +10,7 @@ function mapState(state) {
         selectedAlgorithm: state.pagesIndexSelectedAlgorithmReducers,
         searched: state.pagesIndexFormsDatasetSearched,
         switchDataset: state.pagesIndexSwitchDataset,
+        lang: state.rootLangReducers
     }
 }
 

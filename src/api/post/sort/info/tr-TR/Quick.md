@@ -1,4 +1,4 @@
-# HIZLI SIRALAMA(QUICK SORT)
+# HIZLI SIRALAMA
 
 ### Zaman Karmaşıklığı
 
@@ -14,7 +14,7 @@ Algoritmanın iteratif denklemi ise:
     
 olarak ifade edilebilir.
 
-### Çalışma Mantığı
+### Hızlı Sıralama Nasıl Çalışır ?
 
 &emsp;Algoritmaya bir dizi verildiğinde, herhangi bir sayı pivot olarak seçilir(genellikle ilk eleman). Dizide pivottan küçük olan sayıların pivottan düşük indislere, pivottan büyük olan sayıların pivottan yüksek indislerde olacak halde güncellenir. Oluşan alt ve üst diziler için hızlı sıralama algoritması tekrar çağrılır. En son olarak sıralanmış dizi geriye döndürülür.
 

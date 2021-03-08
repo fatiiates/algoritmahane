@@ -1,7 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import fs from 'fs';
-
-import performanceBinarySearch from '../../api/post/search/BinarySearch';
 import getAllAlgorithms from '../../api';
 import { createErrorResponse, createSuccessResponse } from '../../constants/types/generators/Response';
 
@@ -12,8 +9,10 @@ const Main = async (req: NextApiRequest, res: NextApiResponse) => {
         res.setHeader('Content-Type', 'application/json')
         if (req.method === 'POST') {
             
+            const lang: string = req.body.locale || process.env.defaultLocale;
+            
             let send: TResponse = createSuccessResponse({
-                result: await getAllAlgorithms()
+                result: await getAllAlgorithms(lang)
             });
 
             return res.status(200).json(send);

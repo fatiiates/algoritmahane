@@ -1,3 +1,4 @@
+import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createErrorResponse, createSuccessResponse } from '../../../../constants/types/generators/Response';
@@ -18,12 +19,13 @@ const Main = async (req: NextApiRequest, res: NextApiResponse) => {
 
             } else {
 
+                const lang: string = req.body.locale || process.env.defaultLocale;
+
                 var algorithmReadme = (str) => str.charAt(0).toUpperCase() + str.slice(1)
                 
                 let send: TResponse = createSuccessResponse({
-                    result: require(`../../../../api/post/search/info/${algorithmReadme(req.query.algorithm)}.md`).default
-                });
-
+                    result: require(`../../../../api/post/search/info/${lang}/${algorithmReadme(req.query.algorithm)}.md`).default
+                }); 
                 return res.status(200).json(send);
             }
         } else {
@@ -45,6 +47,7 @@ const Main = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(send.err_code).json(send);
         
     }
+    
 }
 
 export default Main;

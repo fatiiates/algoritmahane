@@ -15,10 +15,14 @@ import Grid from '@material-ui/core/Grid';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import Link from 'next/link';
+
+import SelectLanguage from './selectLanguage';
+
 import { connector } from './Redux';
 import { THeaderAppBarProps, IHideOnScrollProps } from './Types';
 import { styles } from './Styles';
-import { withCookies } from 'react-cookie';
+import IconButton from '@material-ui/core/IconButton';
+
 
 
 function HideOnScroll(props: IHideOnScrollProps) {
@@ -46,22 +50,10 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
     }
 
     handleTheme = () => {
-        const { cookies, theme } = this.props;
-        const date = new Date();
-        date.setMonth(date.getMonth() + 3)
-        switch (!theme) {
-            case true:
-                cookies.set('theme', "dark", {
-                    expires: date
-                });
-                break;
+        const { theme } = this.props;
 
-            default:
-                cookies.set('theme', "light", {
-                    expires: date
-                });
-                break;
-        }
+        localStorage.setItem("theme", !theme ? "dark" : "light");
+
         this.props.actions.changeTheme(!theme);
     }
 
@@ -99,27 +91,32 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
                                         </Button>
                                     </Link>
                                 </Grid>
-                                <Grid className={classes.changeTheme} item xs={2}>
-                                    <Button
-                                        className={classes.iconLink}
-                                        onClick={this.handleTheme}
-                                        color="inherit"
-                                    >
-                                        {this.props.theme ? <BrightnessHighSharpIcon /> : <Brightness6SharpIcon />}
-                                    </Button>
-                                </Grid>
+                                <Grid className={classes.changeProperties} item xs={4}>
+                                    <Grid className={classes.change} justify="flex-end" container>
+                                        <SelectLanguage responsive={true}/>
+                                    </Grid>
+                                    <Grid className={classes.hiddenMenu} container>
+                                        <Button
+                                            className={classes.iconLink}
+                                            onClick={this.handleTheme}
+                                            color="inherit"
+                                        >
+                                            {this.props.theme ? <BrightnessHighSharpIcon /> : <Brightness6SharpIcon />}
+                                        </Button>
+                                    </Grid>
+                                </Grid>                                                              
                             </Grid>
                         </Hidden>
                         <Hidden smDown>
-                            <Grid className={classes.changeTheme} item xs={1}>
-                                <Button
-                                    className={classes.iconLink}
+                            <Grid className={classes.change} item>
+                                <SelectLanguage/>
+                                <IconButton
                                     onClick={this.handleTheme}
                                     color="inherit"
                                 >
                                     {this.props.theme ? <BrightnessHighSharpIcon /> : <Brightness6SharpIcon />}
-                                </Button>
-                            </Grid>
+                                </IconButton>
+                            </Grid>         
                         </Hidden>
                     </Toolbar>
                 </AppBar>
@@ -128,4 +125,4 @@ class HeaderAppBar extends React.Component<THeaderAppBarProps> {
     }
 }
 
-export default connector(withStyles(styles)(withRouter(withCookies(HeaderAppBar))));
+export default connector(withStyles(styles)(withRouter(HeaderAppBar)));

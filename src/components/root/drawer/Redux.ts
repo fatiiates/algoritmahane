@@ -1,11 +1,12 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as rootDrawerActions from '../../../redux/actions/root/drawerActions';
+import * as rootDrawerActions from '@redux/actions/root/drawerActions';
 
 function mapState(state) {
     return {
         openDrawer: state.rootDrawerReducers,
         algorithms: state.pagesIndexAlgorithmsReducers,
+        lang: state.rootLangReducers
     }
 }
 

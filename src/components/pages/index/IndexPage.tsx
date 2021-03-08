@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import SortIcon from '@material-ui/icons/Sort';
 
-import Template from '../../root/contents/_template';
-import Main from '../../root/contents/_main';
+import Template from '@components/root/contents/_template';
+import Main from '@components/root/contents/_main';
 import Stepper from './stepper';
 import Link from 'next/link';
 
@@ -62,6 +62,7 @@ class Index extends React.Component<TIndexProps>{
 
                 data = {
                     array: this.props.specialDataset,
+                    locale: this.props.lang
                 }
 
                 break;
@@ -75,7 +76,6 @@ class Index extends React.Component<TIndexProps>{
 
                 if (this.props.randomDataset.PIECE == null || this.props.randomDataset.PIECE == 0)
                     return 0;
-                console.log(data)
                 const { MIN, MAX, PIECE } = this.props.randomDataset;
 
                 let numbers = Array.from(Array(parseInt(PIECE)).keys()).map(
@@ -87,12 +87,14 @@ class Index extends React.Component<TIndexProps>{
                     else {
                         data = {
                             array: numbers,
-                            searched: this.props.searched
+                            searched: this.props.searched,
+                            locale: this.props.lang
                         }
                         break;
                     }
                 data = {
-                    array: numbers
+                    array: numbers,
+                    locale: this.props.lang
                 }
 
                 break;
@@ -133,13 +135,11 @@ class Index extends React.Component<TIndexProps>{
     }
 
     render() {
-        const { classes, algorithms, selectedAlgorithm, out } = this.props;
+        const { classes, algorithms, selectedAlgorithm, out, lang } = this.props;
 
-        const steps = [
-            'Algoritmanızı seçiniz.',
-            'Veri seti giriniz/oluşturunuz.',
-            'Değerler'
-        ];
+        const { indexPage } = require(`@constants/lang/${lang}.tsx`);
+
+        const steps = indexPage.stepperSteps;
 
         const getStepContent = (step: any) => {
 
@@ -156,9 +156,9 @@ class Index extends React.Component<TIndexProps>{
                                                     <Card className={classes.cardDisplayContents}>
                                                         <CardContent className={classes.cardContent}>
                                                             <Typography className={classes.cardTitle} color="textSecondary" gutterBottom>
-                                                                <Search className={classes.icon} />{`${algorithms.search.length} adet arama algoritması bulundu.`}&emsp;
+                                                                <Search className={classes.icon} />{`${algorithms.search.algorithms.length} ${indexPage.foundedSearchAlgorithm}`}&emsp;
                                                             </Typography>
-                                                            {algorithms.search.map((algorithm) => (
+                                                            {algorithms.search.algorithms.map((algorithm) => (
                                                                 <Grid
                                                                     key={`algorithms-search-${algorithm.endPoint}`}
                                                                     className={classes.buttonGrid}
@@ -182,9 +182,9 @@ class Index extends React.Component<TIndexProps>{
                                                     <Card className={classes.cardDisplayContents}>
                                                         <CardContent className={classes.cardContent}>
                                                             <Typography className={classes.cardTitle} color="textSecondary" gutterBottom>
-                                                                <SortIcon className={classes.icon} />{`${algorithms.sort.length} adet sıralama algoritması bulundu.`}
+                                                                <SortIcon className={classes.icon} />{`${algorithms.sort.algorithms.length} ${indexPage.foundedSortAlgorithm}`}
                                                             </Typography>
-                                                            {algorithms.sort.map((algorithm) => (
+                                                            {algorithms.sort.algorithms.map((algorithm) => (
                                                                 <Grid
                                                                     key={`algorithms-sort-${algorithm.endPoint}`}
                                                                     className={classes.buttonGrid}
@@ -217,7 +217,7 @@ class Index extends React.Component<TIndexProps>{
                                     selectedAlgorithm ?
                                         <Box>
                                             <Typography variant="h5" align="center">
-                                                Hmm. Bu bir {selectedAlgorithm.endPoint.split('/')[0] == 'search' ? 'arama' : 'sıralama'} algoritması. Güzel seçim!
+                                                Hmm. {indexPage.thatIs + ' ' + (selectedAlgorithm.endPoint.split('/')[0] == 'search' ? indexPage.search : indexPage.sort) + '' + indexPage.niceChoice} 
                                             </Typography>
                                             <Grid justify="center" container>
                                                 <Card className={classes.cardRoot}>
@@ -225,10 +225,10 @@ class Index extends React.Component<TIndexProps>{
                                                         <Card className={classes.cardDisplayContents}>
                                                             <CardContent className={classes.cardContent}>
                                                                 <Typography variant="h6">
-                                                                    # Bilgilendirme
+                                                                    {indexPage.information}
                                                                 </Typography>
                                                                 <Typography>
-                                                                    &emsp;Seçtiğiniz algoritma: {selectedAlgorithm.name}
+                                                                    &emsp;{indexPage.choosenAlgorithm + ' ' + selectedAlgorithm.name}
                                                                 </Typography>
 
                                                             </CardContent>
@@ -236,7 +236,7 @@ class Index extends React.Component<TIndexProps>{
                                                         <Card className={classes.cardDisplayContents}>
                                                             <CardContent className={classes.cardContent}>
                                                                 <Typography variant="h6">
-                                                                    # Kısaca {selectedAlgorithm.name}
+                                                                    {indexPage.briefly + ' ' + selectedAlgorithm.name}
                                                                 </Typography>
                                                                 <Typography>
                                                                     &emsp;{selectedAlgorithm.explain}
@@ -246,13 +246,10 @@ class Index extends React.Component<TIndexProps>{
                                                         <Card className={classes.cardDisplayContents}>
                                                             <CardContent className={classes.cardContent}>
                                                                 <Typography variant="h6">
-                                                                    # Veri seti kısıtlamaları
+                                                                {indexPage.datasetConstraints}
                                                             </Typography>
                                                                 {
-                                                                    selectedAlgorithm.constraints.concat([
-                                                                        "Her veri ','(virgül) ile ayrılmalıdır.",
-                                                                        "Ondalıklı veriler için '.'(nokta) ayracı kullanılmalıdır."
-                                                                    ]).map((item, i) => (
+                                                                    selectedAlgorithm.constraints.concat(indexPage.defaultConstraints).map((item, i) => (
                                                                         <Typography key={`constraint-${i}`}>
                                                                             &emsp;{i + 1} - {item}
                                                                         </Typography>
@@ -273,7 +270,7 @@ class Index extends React.Component<TIndexProps>{
                                                                     onClick={this.changeSwitchDataset}
                                                                     className={classes.randomDatasetTyporgraphy}
                                                                 >
-                                                                    Rastgele veri seti
+                                                                    {indexPage.randomDataset}
                                                                 <FormControlLabel
                                                                         classes={{ root: classes.formControlLabel }}
                                                                         control={
@@ -287,7 +284,7 @@ class Index extends React.Component<TIndexProps>{
                                                                         label=""
                                                                     />
                                                                     <Typography onClick={this.changeSwitchDataset} variant="button">
-                                                                        Özel veri seti
+                                                                        {indexPage.specialDataset}
                                                                 </Typography>
                                                                 </Typography>
                                                             </Grid>
@@ -300,7 +297,7 @@ class Index extends React.Component<TIndexProps>{
                                                                             startIcon={<KeyboardBackspaceIcon />}
                                                                             onClick={this.handleBack}
                                                                         >
-                                                                            Geri
+                                                                            {indexPage.backButton}
                                                                         </Button>
                                                                         <Button
                                                                             variant="contained"
@@ -309,7 +306,7 @@ class Index extends React.Component<TIndexProps>{
                                                                             name="button"
                                                                             onClick={this.handleOut}
                                                                         >
-                                                                            Sonuçları gör
+                                                                            {indexPage.resultsButton}
                                                                         </Button>
                                                                         <Link href={`/info/${selectedAlgorithm.endPoint}`}>
                                                                             <Button
@@ -317,7 +314,7 @@ class Index extends React.Component<TIndexProps>{
                                                                                 className={classes.infoButton}
                                                                                 endIcon={<InfoIcon />}
                                                                             >
-                                                                                Daha fazla bilgi
+                                                                                {indexPage.moreInformation}
                                                                             </Button>
                                                                         </Link>
                                                                     </Grid>
@@ -331,7 +328,7 @@ class Index extends React.Component<TIndexProps>{
                                                                             name="button"
                                                                             onClick={this.handleOut}
                                                                         >
-                                                                            Sonuçları gör
+                                                                            {indexPage.resultsButton}
                                                                         </Button>
                                                                     </Grid>
                                                                     <Grid justify="center" container>
@@ -341,7 +338,7 @@ class Index extends React.Component<TIndexProps>{
                                                                                 className={classes.infoButton}
                                                                                 endIcon={<InfoIcon />}
                                                                             >
-                                                                                Daha fazla bilgi
+                                                                                {indexPage.moreInformation}
                                                                             </Button>
                                                                         </Link>
                                                                     </Grid>
@@ -352,7 +349,7 @@ class Index extends React.Component<TIndexProps>{
                                                                             onClick={this.handleBack}
                                                                             className={classes.backButton}
                                                                         >
-                                                                            Geri
+                                                                            {indexPage.backButton}
                                                                         </Button>
                                                                     </Grid>
                                                                 </Hidden>
@@ -364,7 +361,7 @@ class Index extends React.Component<TIndexProps>{
                                         </Box>
                                         :
                                         <Grid justify="center" container>
-                                            Seçili bir algoritma bulunamadı. Lütfen geri gidin ve bir algoritma seçin.
+                                            {indexPage.selectedAlgorithmIsNone}
                                         </Grid>
                                 }
                             </Main>
@@ -385,41 +382,41 @@ class Index extends React.Component<TIndexProps>{
                                     <CardContent>
                                         <Grid className={classes.resultGrid} justify="center" container>
                                             <Typography className={classes.resultTitle} variant="h4" align="center">
-                                                Başarılı! Değerler elimize ulaştı.
+                                                {indexPage.success}
                                             </Typography>
                                             <TableContainer component={Paper}>
                                                 <Table aria-label="caption table">
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell><strong>Öznitelik</strong></TableCell>
-                                                            <TableCell align="center"><strong>Değerler</strong></TableCell>
+                                                            <TableCell><strong>{indexPage.attribute}</strong></TableCell>
+                                                            <TableCell align="center"><strong>{indexPage.results}</strong></TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
                                                         {performance && <TableRow >
-                                                            <TableCell><UpdateRoundedIcon /> Performans</TableCell>
-                                                            <TableCell align="center">{`${(performance * 1000).toFixed(3)} milisaniye içerisinde gerçekleştirildi.`}</TableCell>
+                                                            <TableCell><UpdateRoundedIcon /> {indexPage.performance}</TableCell>
+                                                            <TableCell align="center">{indexPage.elapsedTime((performance * 1000).toFixed(3))}</TableCell>
                                                         </TableRow>}
                                                         {numberOfTransactions && <TableRow >
-                                                            <TableCell><SettingsEthernetIcon /> İşlem Sayısı</TableCell>
-                                                            <TableCell align="center">Tam olarak {numberOfTransactions} işlem gerçekleştirildi.</TableCell>
+                                                            <TableCell><SettingsEthernetIcon /> {indexPage.transactionCount}</TableCell>
+                                                            <TableCell align="center">{indexPage.performedProcess(numberOfTransactions)}</TableCell>
                                                         </TableRow>}
                                                         {index && <TableRow >
-                                                            <TableCell><FindInPageIcon /> Arama Sonucu</TableCell>
+                                                            <TableCell><FindInPageIcon /> {indexPage.searchResult}</TableCell>
                                                             <TableCell align="center">
                                                                 {index != -1 ?
-                                                                    `Aradığınız eleman ${index}. indekste bulunuyor`
+                                                                    indexPage.searchedElementIsExist(index)
                                                                     :
-                                                                    "Aradığınız eleman veri setinde bulunmuyor."
+                                                                    indexPage.searchedElementIsNone
                                                                 }
                                                             </TableCell>
                                                         </TableRow>}
                                                         {sortedDataset && <TableRow >
-                                                            <TableCell><SortIcon /> Sıralanmış Veri Seti</TableCell>
+                                                            <TableCell><SortIcon /> {indexPage.sortedDataset}</TableCell>
                                                             <TableCell align="center">{sortedDataset}</TableCell>
                                                         </TableRow>}
                                                         {dataset && <TableRow >
-                                                            <TableCell><StorageIcon /> Kullanılan veri seti</TableCell>
+                                                            <TableCell><StorageIcon /> {indexPage.usedDataset}</TableCell>
                                                             <TableCell align="center">{dataset}</TableCell>
                                                         </TableRow>}
                                                     </TableBody>
@@ -433,7 +430,7 @@ class Index extends React.Component<TIndexProps>{
                                                     startIcon={<KeyboardBackspaceIcon />}
                                                     onClick={this.handleBack}
                                                 >
-                                                    Geri
+                                                    {indexPage.backButton}
                                                 </Button>
                                                 <Button
                                                     variant="contained"
@@ -441,7 +438,7 @@ class Index extends React.Component<TIndexProps>{
                                                     name="button"
                                                     onClick={this.handleReset}
                                                 >
-                                                    Sıfırla
+                                                    {indexPage.clearButton}
                                                 </Button>
                                             </Grid>
                                         </Hidden>
@@ -454,7 +451,7 @@ class Index extends React.Component<TIndexProps>{
                                                     name="button"
                                                     onClick={this.handleReset}
                                                 >
-                                                    Sıfırla
+                                                    {indexPage.clearButton}
                                                 </Button>
                                             </Grid>
                                             <Grid justify="center" container>
@@ -464,7 +461,7 @@ class Index extends React.Component<TIndexProps>{
                                                     className={classes.backButton}
                                                     onClick={this.handleBack}
                                                 >
-                                                    Geri
+                                                    {indexPage.backButton}
                                                 </Button>
                                             </Grid>
                                         </Hidden>
@@ -474,7 +471,7 @@ class Index extends React.Component<TIndexProps>{
                         </Main >
                     );
                 default:
-                    return 'Adım bulunamadı.';
+                    return indexPage.defaultStepInfo;
             }
         }
 
@@ -484,7 +481,7 @@ class Index extends React.Component<TIndexProps>{
                     algorithms &&
                     <Main>
                         <Typography align="center" variant="h2">
-                            Haydi, başlayalım!
+                            {indexPage.start}
                         </Typography>
                         <Stepper
                             steps={steps}
@@ -493,7 +490,6 @@ class Index extends React.Component<TIndexProps>{
                         />
                     </Main>
                 }
-
             </Template>
         );
     }

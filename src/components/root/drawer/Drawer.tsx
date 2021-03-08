@@ -10,12 +10,11 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import SearchIcon from '@material-ui/icons/Search';
+import SortIcon from '@material-ui/icons/Sort';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import SearchIcon from '@material-ui/icons/Search';
-import SortIcon from '@material-ui/icons/Sort';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Collapse from '@material-ui/core/Collapse';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
@@ -23,6 +22,7 @@ import { connector } from './Redux';
 import { TDrawerProps, IDrawerState } from './Types';
 import { styles } from './Styles';
 import Link from 'next/link';
+import { Avatar } from '@material-ui/core';
 
 class MyDrawer extends React.Component<TDrawerProps, IDrawerState>{
     constructor(props: TDrawerProps) {
@@ -48,9 +48,17 @@ class MyDrawer extends React.Component<TDrawerProps, IDrawerState>{
     render() {
 
         const { openDrawerDropDown } = this.state;
-        const { classes, window, openDrawer, algorithms } = this.props;
+        const { classes, window, openDrawer, algorithms, lang } = this.props;
 
         const container = window !== undefined ? () => window().document.body : undefined;
+
+        const icons = {
+            search: <SearchIcon/>,
+            sort: <SortIcon/>
+        };
+
+        const { drawerLang } = require(`@constants/lang/${lang}.tsx`);
+        console.log(lang);
 
         const renderDrawer = (
             <div>
@@ -65,54 +73,43 @@ class MyDrawer extends React.Component<TDrawerProps, IDrawerState>{
                 <div className={classes.toolbar}>
                     <Link href="/">
                         <ButtonBase component={Typography} variant="h6" className={classes.drawerTitle}>
-                            ALGORİTMAHANE
+                            <Avatar src="/static/icon.png" />
+                            {drawerLang.organizationName}
                         </ButtonBase>
                     </Link>
                 </div>
                 <Divider />
                 <List>
-                    <ListItem button data-drop="1" onClick={this.handleDrawerDropDown}>
-                        <ListItemIcon>
-                            <SearchIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Arama Algoritmaları" />
-                        {openDrawerDropDown == 1 ? <ExpandLess /> : <ExpandMore />}
-                    </ListItem>
-                    <Collapse in={openDrawerDropDown == 1} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                            {algorithms.search.map((algorithm) => (
-                                <Link key={`${algorithm.name}-search-drawer-column`} href={`/info/${algorithm.endPoint}`}>
-                                    <ListItem button className={classes.nested}>
-                                        <ListItemText primary={algorithm.name} />
-                                    </ListItem>
-                                </Link>
-                            ))}
-                        </List>
-                    </Collapse>
-                    <ListItem button data-drop="2" onClick={this.handleDrawerDropDown}>
-                        <ListItemIcon>
-                            <SortIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Sıralama Algoritmaları" />
-                        {openDrawerDropDown == 2 ? <ExpandLess /> : <ExpandMore />}
-                    </ListItem>
-                    <Collapse in={openDrawerDropDown == 2} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                            {algorithms.sort.map((algorithm) => (
-                                <Link key={`${algorithm.name}-sort-drawer-column`} href={`/info/${algorithm.endPoint}`}>
-                                    <ListItem button className={classes.nested}>
-                                        <ListItemText primary={algorithm.name} />
-                                    </ListItem>
-                                </Link>
-                            ))}
-                        </List>
-                    </Collapse>
+                    {
+                        React.Children.toArray(Object.keys(algorithms).map((item, i) => (
+                            <React.Fragment>
+                                 <ListItem button data-drop={i+1} onClick={this.handleDrawerDropDown}>
+                                    <ListItemIcon>
+                                        {icons[algorithms[item].icon]}
+                                    </ListItemIcon>
+                                    <ListItemText primary={algorithms[item].name} />
+                                    {openDrawerDropDown == i+1 ? <ExpandLess /> : <ExpandMore />}
+                                </ListItem>
+                                <Collapse in={openDrawerDropDown == i + 1} timeout="auto" unmountOnExit>
+                                    <List component="div" disablePadding>
+                                        {algorithms[item].algorithms.map((algorithm) => (
+                                            <Link key={`${algorithm.name}-search-drawer-column`} href={`/info/${algorithm.endPoint}`}>
+                                                <ListItem button className={classes.nested}>
+                                                    <ListItemText primary={algorithm.name} />
+                                                </ListItem>
+                                            </Link>
+                                        ))}
+                                    </List>
+                                </Collapse>
+                            </React.Fragment>
+                        )))
+                    }
                 </List>
             </div >
         );
 
         return (
-            <nav className={classes.drawer} aria-label="mailbox folders">
+            <nav className={classes.drawer} >
                 <Hidden mdUp >
                     <Drawer
                         container={container}

@@ -16,9 +16,6 @@ class Random extends React.Component<TRandomProps>{
         this.randomDatasetOnChange = this.randomDatasetOnChange.bind(this);
     }
 
-    //setMaxRefValue = (e) => this.maxRef = e.target.value;
-    //setPieceRefValue = (e) => this.pieceRef = e.target.value;
-
     randomDatasetOnChange = async (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, key: string) => {
         const re = /^-?\d{1,7}?$/;
 
@@ -37,16 +34,18 @@ class Random extends React.Component<TRandomProps>{
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, lang } = this.props;
         const { MAX, MIN, PIECE } = this.props.randomDataset;
+
+        const { forms } = require(`@constants/lang/${lang}.tsx`);
 
         return (
             <React.Fragment >
                 <Typography variant="h5" align="center">
-                    Veri setinizin özelliklerini belirleyiniz.
+                    {forms.datasetFormRandomDatasetInput}
                 </Typography>
                 <TextField
-                    label="Sayı aralığı - Min"
+                    label={forms.datasetFormRandomDatasetMinInputPlaceHolder}
                     variant="outlined"
                     className={classes.textField}
                     helperText=""
@@ -54,7 +53,7 @@ class Random extends React.Component<TRandomProps>{
                     onChange={e => this.randomDatasetOnChange(e, 'MIN')}
                 />
                 <TextField
-                    label="Sayı aralığı - Max"
+                    label={forms.datasetFormRandomDatasetMaxInputPlaceHolder}
                     variant="outlined"
                     className={classes.textField}
                     helperText=""
@@ -62,7 +61,7 @@ class Random extends React.Component<TRandomProps>{
                     onChange={e => this.randomDatasetOnChange(e, 'MAX')}
                 />
                 <TextField
-                    label="Üretilecek Adet"
+                    label={forms.datasetFormRandomDatasetPieceInputPlaceHolder}
                     variant="outlined"
                     className={classes.textField}
                     error={(PIECE != null && PIECE < 2) || PIECE == ''}

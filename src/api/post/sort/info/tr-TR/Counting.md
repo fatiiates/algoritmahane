@@ -1,4 +1,4 @@
-# SAYMA SIRALAMASI(COUNTING SORT)
+# SAYMA SIRALAMASI
 
 ### Zaman Karmaşıklığı
 
@@ -8,7 +8,7 @@ Algoritmanın zaman karmaşıklığı, aşağıda gösterildiği gibidir.
     T(n) = | O(n + k) en kötü durum
            | O(n + k) ortalama durum
 
-### Çalışma Mantığı
+### Sayma Sıralaması Nasıl Çalışır ?
 
 &emsp;Algoritmaya bir dizi verildiğinde, verilerin 0 ile k arasında olduğu kabul edilir. K boyutunda bir dizi tanımlanır ve bize verilen dizinin her elemanı taranmaya başlar. Taranan her eleman için k boyutunda ifade ettiği alan bir arttırılır. Daha sonra tanımlanan dizi içerisindeki boş olmayan indisler sırasıyla yeni bir diziye aktarılır. Son durumda geriye yeni dizi döndürülür.
 

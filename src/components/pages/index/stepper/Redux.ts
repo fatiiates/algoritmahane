@@ -1,10 +1,11 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as indexActions from '../../../../redux/actions/pages/indexActions';
+import * as indexActions from '@redux/actions/pages/indexActions';
 
 function mapState(state) {
     return {
-        activeStep: state.pagesIndexStepperReducers
+        activeStep: state.pagesIndexStepperReducers,
+        lang: state.rootLangReducers
     }
 }
 

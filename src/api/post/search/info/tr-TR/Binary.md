@@ -1,29 +1,29 @@
-# İKİLİ ARAMA(BINARY SEARCH)
+# İKİLİ ARAMA
 
 ### Zaman Karmaşıklığı
 
 Algoritmanın zaman karmaşıklığı, aşağıda gösterildiği gibidir.
 
-           | O(1)  en iyi durum
+           | O(1)     en iyi durum
     T(n) = | O(log n) en kötü durum
            | O(log n) ortalama durum
 
-### Çalışma Mantığı
+### İkili Arama Nasıl Çalışır ?
 
 &emsp;Algoritmaya sıralanmış bir dizi ve aranacak eleman verildiğinde, dizinin ortasında bulunan sayı ile aranan sayıyı karşılaştırılır ve bu işlem sayı bulunana kadar veya eldeki dizide bir ifade kalmayana kadar devam eder. Algoritma sonucunda örnek olarak aranan eleman bulunamadıysa geriye -1, aranan eleman bulunduysa dizideki indisi döndürülerek sonlandırılır.
 
 ### Sözde Kodu
 
-    İkili Arama(Dizi,n,x,bulundu, yeri)
-      Yerel değişkenler
-      alt, ust, orta : integer;
-      Ust = n, alt = 1, bulundu = 0
-      (bulundu = 0) ve (ust = alt) olduğu sürece devam et
-         orta = ( alt + ust ) / 2 
-         eğer x = Dizi[orta] ise
-          bulundu = 1
-         değil ve eğer x < Dizi2[ orta ] ise
-          ust = orta-1
-        değilse
-          alt = orta+1
-      yeri = orta
+    Binary Search(Array,n,x,found,foundedIndex)
+      Local variables
+      bottom, top, medium : integer;
+      Ust = n, bottom = 1, found = 0
+      if (found = 0) and (top = bottom)
+         medium = ( bottom + top ) / 2 
+         if x = Array[medium] ise
+          found = 1
+         elif x < Array2[ medium ]
+          top = medium-1
+         else
+          bottom = medium+1
+      foundedIndex = medium

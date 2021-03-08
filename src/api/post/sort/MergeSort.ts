@@ -1,5 +1,5 @@
 import { performance } from 'perf_hooks';
-import { createSortPerformance } from '../../../constants/types/generators/Performance';
+import { createSortPerformance } from '@constants/types/generators/Performance';
 
 export const mergeSortController = async (array: Array<number>, left: number, right: number): Promise<any> => {
 

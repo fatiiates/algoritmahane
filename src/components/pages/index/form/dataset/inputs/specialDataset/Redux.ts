@@ -1,13 +1,13 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as indexActions from '../../../../../../../redux/actions/pages/indexActions';
+import * as indexActions from '@redux/actions/pages/indexActions';
 
 function mapState(state) {
     return {
         specialDataset: state.pagesIndexFormsDatasetSpecial,
         selectedAlgorithm: state.pagesIndexSelectedAlgorithmReducers,
-        state: state
+        lang: state.rootLangReducers,
     }
 }
 

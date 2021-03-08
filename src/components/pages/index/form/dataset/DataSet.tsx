@@ -33,7 +33,9 @@ class DataSet extends React.Component<TFormProps> {
 
     render() {
 
-        const { classes, specialDataset, randomDataset, selectedAlgorithm, searched } = this.props;
+        const { classes, specialDataset, randomDataset, selectedAlgorithm, searched, lang } = this.props;
+
+        const { forms } = require(`@constants/lang/${lang}.tsx`);
 
         const specialInput = (
             <Box className={classes.root}>
@@ -50,7 +52,7 @@ class DataSet extends React.Component<TFormProps> {
         const searchInput = selectedAlgorithm.endPoint.split('/')[0] == 'search' ?
             (
                 <TextField
-                    label="Aranacak Değer"
+                    label={forms.datasetFormInputForSearchPlaceHolder}
                     variant="outlined"
                     placeholder="16"
                     name="searched"
@@ -58,7 +60,7 @@ class DataSet extends React.Component<TFormProps> {
                     defaultValue={searched}
                     error={searched == ''}
                     className={classes.searchedInput}
-                    helperText="1- Yalnızca sayı ve '.'(nokta) işaretleri kabul edilir."
+                    helperText={forms.datasetFormInputForSearchHelperText}
                 />
             ) : undefined
 

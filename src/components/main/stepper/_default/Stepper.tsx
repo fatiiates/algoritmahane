@@ -10,11 +10,11 @@ import Hidden from '@material-ui/core/Hidden';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 
-import { IStepperProps, IStepperState } from './Types';
-import { StepConnector } from '@material-ui/core';
+import { TStepperProps, IStepperState } from './Types';
+import { connector } from './Redux';
 
-class DefaultStepper extends React.Component<IStepperProps, IStepperState>{
-    constructor(props: IStepperProps) {
+class DefaultStepper extends React.Component<TStepperProps, IStepperState>{
+    constructor(props: TStepperProps) {
         super(props);
         this.state = {
             activeStep: 0,
@@ -45,7 +45,9 @@ class DefaultStepper extends React.Component<IStepperProps, IStepperState>{
             this.props.onChangeReset(event);
         this.setState({ activeStep: 0 });
     };
-
+    componentDidMount(){
+        console.log(2);
+    }
     render() {
         const {
             classes,
@@ -64,6 +66,9 @@ class DefaultStepper extends React.Component<IStepperProps, IStepperState>{
 
         const { activeStep } = this.state;
 
+        const { stepperLang } = require(`../../../../constants/lang/${this.props.lang}.ts`);
+        
+
         const nextButton = (
             <React.Fragment>
                 <Hidden xsDown>
@@ -72,12 +77,12 @@ class DefaultStepper extends React.Component<IStepperProps, IStepperState>{
                         className={classes.button}
                         onClick={this.handleNext}
                     >
-                        {activeStep === steps.length - 1 ? (finishWord ? finishWord : 'Tamam') : 'İleri'}
+                        {activeStep === steps.length - 1 ? (finishWord ? finishWord : stepperLang.doneButton) : stepperLang.nextButton}
                     </Button>
                 </Hidden>
                 <Hidden smUp>
                     <Button size="small" onClick={this.handleNext}>
-                        {activeStep === steps.length - 1 ? (finishWord ? finishWord : 'Tamam') : 'İleri'}
+                        {activeStep === steps.length - 1 ? (finishWord ? finishWord : stepperLang.doneButton) : stepperLang.nextButton}
                         <KeyboardArrowRight />
                     </Button>
                 </Hidden>
@@ -89,7 +94,7 @@ class DefaultStepper extends React.Component<IStepperProps, IStepperState>{
                 <Hidden smUp>
                     <KeyboardArrowLeft />
                 </Hidden>
-                Geri
+                {stepperLang.backButton}
             </Button>
         );
 
@@ -97,7 +102,7 @@ class DefaultStepper extends React.Component<IStepperProps, IStepperState>{
             <Paper>
                 {lastSentence}
                 <Button onClick={this.handleReset} >
-                    Temizle
+                    {stepperLang.clearButton}
                 </Button>
             </Paper>
         );
@@ -201,4 +206,4 @@ class DefaultStepper extends React.Component<IStepperProps, IStepperState>{
     };
 }
 
-export default DefaultStepper;
+export default connector(DefaultStepper);

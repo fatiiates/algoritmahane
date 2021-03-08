@@ -1,4 +1,4 @@
-# TABAN SIRALAMASI(RADIX SORT)
+# TABAN SIRALAMASI
 
 ### Zaman Karmaşıklığı
 
@@ -8,7 +8,7 @@ Algoritmanın zaman karmaşıklığı, aşağıda gösterildiği gibidir.
     T(n) = | O(n*k) en kötü durum
            | O(n*k) ortalama durum
 
-### Çalışma Mantığı
+### Taban Sıralaması Nasıl Çalışır ?
 
 &emsp;Algoritmaya bir dizi verildiğinde, elemanları en düşük değerlikli basamaktan başlayarak sıralar. Sıralamak için ek olarak kova sıralama veya sayma sıralaması kullanılabilir. En son olarak geriye sıralanmış dizi döndürülür.
 

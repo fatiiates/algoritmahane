@@ -30,15 +30,17 @@ class Special extends React.Component<TSpecialProps>{
     }
 
     render() {
-        const { classes, specialDataset, selectedAlgorithm } = this.props;
-        
+        const { classes, specialDataset, selectedAlgorithm, lang } = this.props;
+
+        const { forms } = require(`@constants/lang/${lang}.tsx`);
+
         return (
             <React.Fragment>
                 <Typography variant="h5" align="center">
-                    Veri setinizi aşağıdaki metin kutusuna giriniz.
-                    </Typography>
+                    {forms.datasetFormSpecialDatasetInput}             
+                </Typography>
                 <TextField
-                    label="Veri seti"
+                    label={forms.datasetFormSpecialDatasetInputPlaceHolder}
                     variant="outlined"
                     placeholder="1.5, 2, 3.2, 5.6, 7"
                     name="array"
@@ -49,9 +51,14 @@ class Special extends React.Component<TSpecialProps>{
                     multiline
                     helperText={
                         <React.Fragment>
-                            1- Verileri aralarında ','(bir adet virgül) ile ayırarak boşluksuz olarak giriniz. <br />
-                            2- Yalnızca sayı,'.'(nokta) ve ','(virgül) işaretleri kabul edilir. <br />
-                            3- {selectedAlgorithm.constraints[1]}
+                            {
+                                React.Children.toArray(forms.datasetFormSpecialDatasetConstraints.concat([selectedAlgorithm.constraints[1]]).map((item, i) => (
+                                    <React.Fragment>
+                                        {(i + 1) + '- ' + item }<br />
+                                    </React.Fragment>
+                                    
+                                )))
+                            }                             
                         </React.Fragment>
                     }
                     error={specialDataset == ''}

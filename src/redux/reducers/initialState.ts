@@ -6,6 +6,7 @@ const initialState: TypeState = {
             OPEN: false,
         },
         THEME: false,
+        LANG: 'tr-TR'
     },
     PAGES: {
         INDEX: {

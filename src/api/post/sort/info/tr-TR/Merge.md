@@ -1,4 +1,4 @@
-# BİRLEŞTİRME SIRALAMASI(MERGE SORT)
+# BİRLEŞTİRME SIRALAMASI
 
 ### Zaman Karmaşıklığı
 
@@ -14,7 +14,7 @@ Algoritmanın iteratif denklemi ise:
     
 olarak ifade edilebilir.
 
-### Çalışma Mantığı
+### Birleştirme Sıralaması Nasıl Çalışır ?
 
 &emsp;Algoritmaya bir dizi verildiğinde, diziyi eşit olarak iki alt diziye ayırır. Bu işlem alt dizilerde 1 eleman kalana kadar devam eder. Alt diziler kendi içerisinde sıralanır ve sıralanmış alt dizileri tek bir sıralı dizi olacak şekilde birleştirir. En son olarak sıralanmış dizi geriye döndürülür.
 

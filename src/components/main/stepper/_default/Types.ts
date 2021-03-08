@@ -1,8 +1,9 @@
 import { WithStyles } from '@material-ui/core/styles';
 import { styles } from './Styles';
 import { StepIconProps } from '@material-ui/core/StepIcon';
+import { TPropsFromRedux } from './Redux';
 
-export interface IStepperProps extends WithStyles<typeof styles>, IIconProps {
+export interface Props extends WithStyles<typeof styles>, IIconProps {
     steps: Array<string>;
     getStepContent: (step: number) => React.ReactNode;
     stepQueue: Array<number>;
@@ -29,4 +30,5 @@ export interface IIconProps {
 export interface IStepIconProps extends IStepperState, IIconProps, StepIconProps {
 }
 
+export type TStepperProps = Props & TPropsFromRedux;
 

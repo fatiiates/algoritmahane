@@ -1,6 +1,6 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as indexActions from '../../../redux/actions/pages/indexActions';
+import * as indexActions from '@redux/actions/pages/indexActions';
 
 function mapState(state) {
     return {
@@ -12,6 +12,7 @@ function mapState(state) {
         specialDataset: state.pagesIndexFormsDatasetSpecial,
         randomDataset: state.pagesIndexFormsDatasetRandom,
         searched: state.pagesIndexFormsDatasetSearched,
+        lang: state.rootLangReducers
     }
 }
 

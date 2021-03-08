@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import rootMaterialTheme from './root/themeReducers';
+import rootLangReducers from './root/langReducers';
 import rootDrawerReducers from './root/drawerReducers';
 import { changeAlgorithms as pagesIndexAlgorithmsReducers } from './pages/index/algorithms';
 import { changeSelectedAlgorithm as pagesIndexSelectedAlgorithmReducers } from './pages/index/algorithms';
@@ -12,6 +13,7 @@ import { changeFormsDatasetSearched as pagesIndexFormsDatasetSearched } from './
 
 const rootReducer = combineReducers({
     rootMaterialTheme,
+    rootLangReducers,
     rootDrawerReducers,
     pagesIndexAlgorithmsReducers,
     pagesIndexSelectedAlgorithmReducers,

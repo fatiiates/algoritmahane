@@ -1,5 +1,5 @@
 import { performance } from 'perf_hooks';
-import { createSearchPerformance } from '../../../constants/types/generators/Performance';
+import { createSearchPerformance } from '@constants/types/generators/Performance';
 
 
 export const linearSearch = async (array: Array<number>, searched: number): Promise<any> => {

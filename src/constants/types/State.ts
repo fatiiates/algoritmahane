@@ -3,7 +3,8 @@ interface TypeState {
         DRAWER: {
             OPEN: boolean
         },
-        THEME: boolean
+        THEME: boolean,
+        LANG: string,
     },
     PAGES: {
         INDEX: {

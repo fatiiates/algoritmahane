@@ -1,4 +1,4 @@
-# ARAYA EKLEME SIRALAMASI(INSERTION SORT)
+# ARAYA EKLEME SIRALAMASI
 
 ### Zaman Karmaşıklığı
 
@@ -8,7 +8,7 @@ Algoritmanın zaman karmaşıklığı, aşağıda gösterildiği gibidir.
     T(n) = | O(n^2) en kötü durum
            | O(n^2) ortalama durum        
 
-### Çalışma Mantığı
+### Araya Ekleme Sıralaması Nasıl Çalışır ?
 
 &emsp;Algoritmaya bir dizi verildiğinde, her dizi elemanı için şu işlemler gerçekleşir: Elemandan kendinden önceki sayılar ile karşılaştırılmaya başlanır. Karşılaştırıldığı sayıdan daha küçük ise o sayı ile yer değiştirilir. Ve sıradaki eleman için döngü dönmeye devam eder. En son olarak geriye sıralanmış dizi döndürülür.
 

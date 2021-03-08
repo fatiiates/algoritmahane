@@ -1,4 +1,4 @@
-# KOVA SIRALAMA(BUCKET SORT)
+# KOVA SIRALAMA
 
 ### Zaman Karmaşıklığı
 
@@ -8,7 +8,7 @@ Algoritmanın zaman karmaşıklığı, aşağıda gösterildiği gibidir.
     T(n) = | O(n^2) en kötü durum
            | O(n + k) ortalama durum
 
-### Çalışma Mantığı
+### Kova Sıralama Nasıl Çalışır ?
 
 &emsp;Algoritmaya 0 ve 1 aralığında bir sayı dizisi verildiğinde, kovalar adında bir dizi oluşturulur. Kovalar dizisinin her bir indisi bir kovadır ve bu kovalar belirli aralıklardaki sayıları tutarlar. Dizi elemanları tek tek taranarak bu kovaların içerisine yerleştirilirler. Daha sonrasında boş olmayan her kova insertion sort metodu ile sıralanır. Son olarak da sıralanmış kovaların içerisindeki elemanlar sırasıyla yeni bir diziye atılır ve geriye yeni dizi döndürülür.
 

@@ -48,26 +48,18 @@ class DefaultStepper extends React.Component<TStepperProps>{
 
     handleNext = () => {
         this.props.actions.changeStepperActiveStep(this.props.activeStep + 1);
-
-        //this.setState({ activeStep: this.state.activeStep + 1 });
     };
 
     handleStep = (step: number) => () => {
         this.props.actions.changeStepperActiveStep(step);
-
-        //this.setState({ activeStep: step });
     };
 
     handleBack = () => {
         this.props.actions.changeStepperActiveStep(this.props.activeStep - 1);
-
-        //this.setState({ activeStep: this.state.activeStep - 1 });
     };
 
     handleReset = () => {
         this.props.actions.changeStepperActiveStep(0);
-
-        //this.setState({ activeStep: 0 });
     };
 
     render() {
@@ -77,14 +69,18 @@ class DefaultStepper extends React.Component<TStepperProps>{
             getStepContent,
             nonLinear,
             stepQueue,
-            activeStep
+            activeStep,
+            lang
         } = this.props;
+
+        const { stepperLang } = require(`../../../../constants/lang/${lang}.tsx`);
+
 
         const nextButton = (
             <React.Fragment>
                 <Hidden smUp>
                     <Button disabled={activeStep != steps.length - 1} size="small" onClick={this.handleReset}>
-                        {activeStep === steps.length - 1 ? 'Sıfırla' : 'İleri'}
+                        {activeStep === steps.length - 1 ? stepperLang.clearButton : stepperLang.nextButton}
                         <KeyboardArrowRight />
                     </Button>
                 </Hidden>
@@ -96,15 +92,15 @@ class DefaultStepper extends React.Component<TStepperProps>{
                 <Hidden smUp>
                     <KeyboardArrowLeft />
                 </Hidden>
-                Geri
+                {stepperLang.backButton}
             </Button>
         );
 
         const resetButton = (
             <Paper>
-                İşlem tamamlandı.
+                {stepperLang.workDone}
                 <Button onClick={this.handleReset} >
-                    Temizle
+                    {stepperLang.clearButton}
                 </Button>
             </Paper>
         );
@@ -131,11 +127,6 @@ class DefaultStepper extends React.Component<TStepperProps>{
                                     >
                                         {steps[activeStep]}
                                     </StepLabel>
-                                    {/*<StepLabel
-                                        classes={{ root: classes.stepLabel, labelContainer: classes.labelContainer }}
-                                    >
-                                        {steps[activeStep]}
-                                    </StepLabel>*/}
                                 </Step>
                                 {getStepContent(stepQueue[activeStep])}
                             </div>

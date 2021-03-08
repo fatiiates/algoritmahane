@@ -1,5 +1,5 @@
 import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import { lightTheme } from '../components/material/Theme';
 
@@ -17,7 +17,7 @@ export default class MyDocument extends Document {
                     {/* PWA primary color */}
                     <meta name="theme-color" content={lightTheme.palette.primary.main} />
 
-                    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet" />
                     <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
                 </Head>
                 <body>
@@ -31,7 +31,8 @@ export default class MyDocument extends Document {
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with server-side generation (SSG).
-MyDocument.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async (ctx:DocumentContext) => {  
+
     // Resolution order
     //
     // On the server:

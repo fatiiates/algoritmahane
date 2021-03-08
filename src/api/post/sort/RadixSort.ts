@@ -1,5 +1,5 @@
 import { performance } from 'perf_hooks';
-import { createSortPerformance } from '../../../constants/types/generators/Performance';
+import { createSortPerformance } from '@constants/types/generators/Performance';
 
 const countingSort = (array: Array<number>, k: number) => {
     let numberOfTransactions = 1;
@@ -29,7 +29,6 @@ const countingSort = (array: Array<number>, k: number) => {
         counting[Math.floor(array[j] / k ) % 10]--;
     }
 
-    //console.log(output);
     for (let j = 0; j < array.length; j++) {
         numberOfTransactions += 1;
         array[j] = output[j];
